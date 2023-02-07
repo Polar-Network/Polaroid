@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * This is a wrapper for the {@link MinecraftServer} server.
  * Internal methods are not documented.
- * @see Polaroid#initServer(String...) for the main method
+ * {@link Polaroid#initServer(String...)} for the main method
  */
 @SuppressWarnings("unused")
 public final class Polaroid {
