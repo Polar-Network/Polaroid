@@ -24,8 +24,9 @@ tasks {
     }
 
     compileJava {
-        options.encoding = "UTF-8"  
-        options.release.set(17)
+        options.encoding = "UTF-8"
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
     }
 
 
