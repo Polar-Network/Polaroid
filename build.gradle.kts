@@ -25,10 +25,9 @@ tasks {
 
     compileJava {
         options.encoding = "UTF-8"
-        sourceCompatibility = "17"
-        targetCompatibility = "17"
+        sourceCompatibility = JavaVersion.VERSION_17.majorVersion
+        targetCompatibility = JavaVersion.VERSION_17.majorVersion
     }
-
 
 }
 
