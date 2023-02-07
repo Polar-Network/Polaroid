@@ -16,3 +16,12 @@ dependencies {
     api("com.github.Minestom:Minestom:-SNAPSHOT")
     api("net.kyori:adventure-text-minimessage:4.12.0")
 }
+
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
+}
