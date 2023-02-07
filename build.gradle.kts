@@ -2,7 +2,6 @@ plugins {
     id("java")
     id("maven-publish")
     id("java-library")
-    id("com.github.johnrengelman.shadow") version "7.1.0"
 }
 
 group = "net.polar"
