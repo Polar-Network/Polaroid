@@ -23,6 +23,12 @@ tasks {
         withSourcesJar()
     }
 
+    compileJava {
+        options.encoding = "UTF-8"  
+        options.release.set(17)
+    }
+
+
 }
 
 publishing {
