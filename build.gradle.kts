@@ -17,10 +17,20 @@ dependencies {
     api("net.kyori:adventure-text-minimessage:4.12.0")
 }
 
+tasks {
+    java  {
+        withJavadocJar()
+        withSourcesJar()
+    }
+
+}
 
 publishing {
     publications {
         create<MavenPublication>("maven") {
+            this.groupId = "net.polar"
+            this.artifactId = "Polaroid"
+            this.version = "1.0-SNAPSHOT"
             from(components["java"])
         }
     }
