@@ -3,6 +3,14 @@ package net.polar.launch;
 import net.polar.Polaroid;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Represents the launch arguments for Polaroid.
+ * @param debugMode Whether debug mode is enabled.
+ * @param address The address to bind to.
+ * @param port The port to bind to.
+ * @param onlineMode Whether online mode is enabled.
+ * @param proxySettings The proxy settings. {@link ProxySettings}
+ */
 public record LaunchArguments(
         boolean debugMode,
         @NotNull String address,
@@ -11,6 +19,11 @@ public record LaunchArguments(
         @NotNull ProxySettings proxySettings
 ) {
 
+    /**
+     * Parses launch arguments from the command line.
+     * @param args The command line arguments.
+     * @return The parsed launch arguments.
+     */
     public static LaunchArguments parse(String[] args) {
 
         String address = "0.0.0.0";

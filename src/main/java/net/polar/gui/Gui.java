@@ -18,6 +18,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Represents a GUI that can be opened and interacted by a player.
+ */
 public abstract class Gui extends Inventory {
 
     private final Map<Integer, GuiClickable> entries = new ConcurrentHashMap<>();
@@ -25,6 +28,14 @@ public abstract class Gui extends Inventory {
     private final Gui parent;
     private final GuiPattern pattern;
 
+    /**
+     * Forms a new GUI with the specified pattern and inventory type.
+     * @param parent the parent GUI of this GUI. Null if this GUI has no parent.
+     * @param pattern the pattern to use for this GUI
+     * @param inventoryType the inventory type to use for this GUI
+     * @param title the title of this GUI. This is defined a {@link String} since
+     *              it automatically gets colorized by {@link ChatColor#color(String)}
+     */
     public Gui(
             @Nullable Gui parent,
             @NotNull GuiPattern pattern,
@@ -53,11 +64,20 @@ public abstract class Gui extends Inventory {
         }, lastRowMiddleSlot);
     }
 
+    /**
+     * Opens this GUI for the specified player.
+     * @param player the player to open this GUI for
+     */
     public void open(@NotNull Player player) {
         rebuildInventory();
         player.openInventory(this);
     }
 
+    /**
+     * Rebuilds the inventory based on the pattern and clickables.
+     * This method is called when the GUI is opened.
+     * You can call this method to update a clickable's display item or completely change it
+     */
     public void rebuildInventory() {
         if (!pattern.getClass().isAssignableFrom(BasicGuiPatterns.class)) return;
         BasicGuiPatterns basicPattern = (BasicGuiPatterns) pattern;
@@ -82,20 +102,44 @@ public abstract class Gui extends Inventory {
         buildClickables();
     }
 
+    /**
+     * Closes the GUI for the specified player.
+     * @param player the player to close the GUI for
+     */
     public void close(@NotNull Player player) {
         player.closeInventory();
     }
 
+    /**
+     * Adds a clickable to the GUI.
+     * @param clickable the clickable to add
+     * @param slot the slot to add the clickable to
+     */
     public void addClickable(@NotNull GuiClickable clickable, int slot) {
         entries.put(slot, clickable);
     }
 
+    /**
+     * Clears all clickables from the GUI.
+     */
     public void clearClickables() {
         entries.clear();
     }
 
+    /**
+     * @return the parent GUI of this GUI. Null if this GUI has no parent.
+     */
     public @Nullable Gui getParent() {
         return parent;
+    }
+
+    /**
+     * Gets the clickable at the specified slot.
+     * @param slot the slot to get the clickable from
+     * @return the clickable at the specified slot. Null if no clickable is present.
+     */
+    public @Nullable GuiClickable getClickableAt(int slot) {
+        return entries.get(slot); // null if no entry
     }
 
     private void buildClickables() {
@@ -104,15 +148,18 @@ public abstract class Gui extends Inventory {
         });
     }
 
-    public @Nullable GuiClickable getClickableAt(int slot) {
-        return entries.get(slot); // null if no entry
-    }
 
+    /**
+     * Represents the main filler item
+     */
     public static final ItemStack FILLER_MAIN = ItemStack.builder(Material.GRAY_STAINED_GLASS_PANE)
             .displayName(Component.empty())
             .meta(meta -> meta.hideFlag(ItemHideFlag.HIDE_ATTRIBUTES))
             .build();
 
+    /**
+     * Represents the secondary filler item
+     */
     public static final ItemStack FILLER_SECONDARY = ItemStack.builder(Material.BLACK_STAINED_GLASS_PANE)
             .displayName(Component.empty())
             .meta(meta -> meta.hideFlag(ItemHideFlag.HIDE_ATTRIBUTES))

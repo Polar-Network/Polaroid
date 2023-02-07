@@ -28,19 +28,24 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * This is a wrapper for the {@link MinecraftServer} server.
+ * Internal methods are not documented.
+ * @see Polaroid#initServer(String...) for the main method
+ */
 @SuppressWarnings("unused")
-public class Polaroid {
+public final class Polaroid {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Polaroid.class);
     private static final AtomicBoolean INITIALIZED = new AtomicBoolean(false);
+    private static final EventNode<Event> EVENT_NODE = EventNode.all("Polaroid");
 
     private static boolean onlineMode;
     private static boolean debugMode;
     private static String address;
     private static int port;
     private static ProxySettings proxySettings;
-    private static final EventNode<Event> EVENT_NODE = EventNode.all("Polaroid");
-    private static TickTrackingInstanceContainer defaultInstance = new TickTrackingInstanceContainer(UUID.randomUUID());
+    private static TickTrackingInstanceContainer defaultInstance;
     private static MotdProvider motdProvider;
 
     private Polaroid(@NotNull LaunchArguments launchArguments) {
@@ -52,25 +57,26 @@ public class Polaroid {
         INITIALIZED.set(true);
     }
 
-    public void onEnable() {
+    private void onEnable() {
         Check.stateCondition(!INITIALIZED.get(), "Polaroid has not been initialized yet!");
 
         MinecraftServer server = MinecraftServer.init();
+        defaultInstance = new TickTrackingInstanceContainer(UUID.randomUUID());
+        MinecraftServer.getDimensionTypeManager().addDimension(TickTrackingInstanceContainer.FULLBRIGHT_DIMENSION);
         MinecraftServer.setBrandName("Polaroid");
 
         if (onlineMode) {MojangAuth.init();}
         if (proxySettings.enabled()) {VelocityProxy.enable(proxySettings.secret());}
         registerInternalListeners();
         MinecraftServer.getGlobalEventHandler().addChild(EVENT_NODE);
+
         server.start(address, port);
         getLogger().info("Polaroid initialized on address " + address + ":" + port);
     }
 
     private void registerInternalListeners() {
         GlobalEventHandler eh = MinecraftServer.getGlobalEventHandler();
-        eh.addListener(PlayerLoginEvent.class, event -> {
-            event.setSpawningInstance(defaultInstance);
-        });
+        eh.addListener(PlayerLoginEvent.class, event -> event.setSpawningInstance(defaultInstance));
         eh.addListener(ServerListPingEvent.class, event -> {
 
             ResponseData data;
@@ -88,27 +94,112 @@ public class Polaroid {
         });
     }
 
+    /**
+     * Initializes the server with the given arguments.
+     * Automatically builds {@link LaunchArguments}
+     * @param args - the arguments required for LaunchArgumentS class
+     */
     public static void initServer(String... args) {
         LaunchArguments launchArguments = LaunchArguments.parse(args);
         Polaroid polaroid = new Polaroid(launchArguments);
         polaroid.onEnable();
     }
 
-    public static void addShutdownTask(@NotNull Runnable runnable) {MinecraftServer.getSchedulerManager().buildShutdownTask(runnable);}
-    public static void registerListeners(@NotNull EventListener<?>... listeners) {Arrays.stream(listeners).forEach(EVENT_NODE::addListener);}
-    public static void registerCommands(@NotNull Command... commands) {Arrays.stream(commands).forEach(MinecraftServer.getCommandManager()::register);}
-    public static boolean isOnlineMode() {return onlineMode;}
-    public static boolean isDebugMode() {return debugMode;}
-    public static String getAddress() {return address;}
-    public static int getPort() {return port;}
-    public static @NotNull ProxySettings getProxySettings() {return proxySettings;}
-    public static @NotNull Logger getLogger() {return LOGGER;}
-    public static @NotNull TickTrackingInstanceContainer getDefaultInstance() {return defaultInstance;}
+    /**
+     * Adds a shutdown task to the Minestom shutdown task list
+     * @param runnable - the task to be executed
+     */
+    public static void addShutdownTask(@NotNull Runnable runnable) {
+        MinecraftServer.getSchedulerManager().buildShutdownTask(runnable);
+    }
+
+    /**
+     * Registers a Minestom event listener to the Polaroid event node
+     * @param listeners - the listeners to be registered
+     */
+    public static void registerListeners(@NotNull EventListener<?>... listeners) {
+        Arrays.stream(listeners).forEach(EVENT_NODE::addListener);
+    }
+
+    /**
+     * Registers an array of commands to the {@link MinecraftServer#getCommandManager()}
+     * @param commands - the array of commands to register
+     */
+    public static void registerCommands(@NotNull Command... commands) {
+        Arrays.stream(commands).forEach(MinecraftServer.getCommandManager()::register);
+    }
+
+    /**
+     * @return true if the server is in online mode, false otherwise
+     */
+    public static boolean isOnlineMode() {
+        return onlineMode;
+    }
+
+    /**
+     * @return true if the server is in debug mode, false otherwise
+     */
+    public static boolean isDebugMode() {
+        return debugMode;
+    }
+
+    /**
+     * @return the Address String the server will start on
+     */
+    public static String getAddress() {
+        return address;
+    }
+
+    /**
+     * @return the port the server will start on
+     */
+    public static int getPort() {
+        return port;
+    }
+
+    /**
+     * @return the specified {@link ProxySettings} for the server
+     */
+    public static @NotNull ProxySettings getProxySettings() {
+        return proxySettings;
+    }
+
+    /**
+     * @return the SLF4J Logger instance for Polaroid
+     */
+    public static @NotNull Logger getLogger() {
+        return LOGGER;
+    }
+
+    /**
+     * @return the default {@link TickTrackingInstanceContainer} for the server.
+     */
+    public static @NotNull TickTrackingInstanceContainer getDefaultInstance() {
+        return defaultInstance;
+    }
+
+    /**
+     * Sets the default {@link TickTrackingInstanceContainer} for the server.
+     * @param defaultInstance - the new default instance
+     */
     public static void setDefaultInstance(@NotNull TickTrackingInstanceContainer defaultInstance) {
         Check.notNull(defaultInstance, "Default instance cannot be null!");
         Polaroid.defaultInstance = defaultInstance;
     }
-    public static @Nullable MotdProvider getMotdProvider() {return motdProvider;}
-    public static void setMotdProvider(@Nullable MotdProvider motdProvider) {Polaroid.motdProvider = motdProvider;}
+
+    /**
+     * @return the {@link MotdProvider} for the server
+     */
+    public static @Nullable MotdProvider getMotdProvider() {
+        return motdProvider;
+    }
+
+    /**
+     * Sets the {@link MotdProvider} for the server
+     * @param provider - the new MotdProvider
+     */
+    public static void setMotdProvider(@Nullable MotdProvider provider) {
+        motdProvider = provider;
+    }
 
 }
