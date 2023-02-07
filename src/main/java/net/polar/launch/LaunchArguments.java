@@ -34,27 +34,27 @@ public record LaunchArguments(
         String proxySecret = "";
 
         for (String arg : args) {
-            if (isFlag(arg, "debug")) {
+            if (arg.startsWith("--debug=")) {
                 debugMode = Boolean.parseBoolean(arg.replaceFirst("--debug=", ""));
                 continue;
             }
-            if (isFlag(arg, "address")) {
+            if (arg.startsWith("--address=")) {
                 address = arg.replaceFirst("--address=", "");
                 continue;
             }
-            if (isFlag(arg, "port")) {
+            if (arg.startsWith("--port=")) {
                 port = Integer.parseInt(arg.replaceFirst("--port=", ""));
                 continue;
             }
-            if (isFlag(arg, "online-mode")) {
+            if (arg.startsWith("--online-mode=")) {
                 onlineMode = Boolean.parseBoolean(arg.replaceFirst("--online-mode=", ""));
                 continue;
             }
-            if (isFlag(arg, "proxy-enabled")) {
+            if (arg.startsWith("--proxy-enabled=")) {
                 proxyEnabled = Boolean.parseBoolean(arg.replaceFirst("--proxy-enabled=", ""));
                 continue;
             }
-            if (isFlag(arg, "proxy-secret")) {
+            if (arg.startsWith("--proxy-secret=")) {
                 proxySecret = arg.replaceFirst("--proxy-secret=", "");
             }
         }
@@ -71,8 +71,5 @@ public record LaunchArguments(
         );
     }
 
-    private static boolean isFlag(String arg, String flag) {
-        return arg.equalsIgnoreCase("--" + flag + "=");
-    }
 
 }
