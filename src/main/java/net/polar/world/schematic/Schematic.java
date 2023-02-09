@@ -5,6 +5,7 @@ import net.minestom.server.coordinate.Point;
 import net.minestom.server.coordinate.Vec;
 import net.minestom.server.instance.Chunk;
 import net.minestom.server.instance.Instance;
+import net.minestom.server.instance.batch.AbsoluteBlockBatch;
 import net.minestom.server.instance.batch.BatchOption;
 import net.minestom.server.instance.batch.ChunkBatch;
 import net.minestom.server.instance.batch.RelativeBlockBatch;
@@ -132,8 +133,13 @@ public record Schematic(
     }
 
 
-    public @NotNull long[] getAffectedChunksReflection(@NotNull SchematicRotation rotation) {
-        final RelativeBlockBatch batch = build(rotation, null);
+    /**
+     * Fetches the used chunks using reflection. Warning: This is a hacky solution and may break in the future and is very slow
+     * @param rotation The rotation to apply to the schematic.
+     * @return The used chunks
+     */
+    public @NotNull long[] getAffectedChunksReflection(@NotNull SchematicRotation rotation, @NotNull Point startPoint) {
+        final AbsoluteBlockBatch batch = build(rotation, null).toAbsoluteBatch(startPoint.blockX(), startPoint.blockY(), startPoint.blockZ());
         final Field field;
         long[] chunks = new long[0];
         try {
