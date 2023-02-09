@@ -18,10 +18,6 @@ dependencies {
 }
 
 tasks {
-    java  {
-        withJavadocJar()
-        withSourcesJar()
-    }
 
     compileJava {
         options.encoding = "UTF-8"
