@@ -1,16 +1,19 @@
 package net.polar.world.schematic;
 
+import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import net.minestom.server.coordinate.Point;
 import net.minestom.server.coordinate.Vec;
 import net.minestom.server.instance.Chunk;
 import net.minestom.server.instance.Instance;
 import net.minestom.server.instance.batch.BatchOption;
+import net.minestom.server.instance.batch.ChunkBatch;
 import net.minestom.server.instance.batch.RelativeBlockBatch;
 import net.minestom.server.instance.block.Block;
 import net.minestom.server.utils.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -128,6 +131,26 @@ public record Schematic(
         return batch;
     }
 
+
+    public @NotNull long[] getAffectedChunksReflection(@NotNull SchematicRotation rotation) {
+        final RelativeBlockBatch batch = build(rotation, null);
+        final Field field;
+        long[] chunks = new long[0];
+        try {
+            field = batch.getClass().getDeclaredField("chunkBatchesMap");
+            boolean accessible = field.canAccess(batch);
+            field.setAccessible(true);
+            Long2ObjectMap<ChunkBatch> chunkBatchesMap = (Long2ObjectMap<ChunkBatch>) field.get(batch);
+            field.setAccessible(accessible);
+            chunks = chunkBatchesMap.keySet().toLongArray();
+        }
+        catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return chunks;
+    }
+
+
     /**
      * Apply the schematic directly given a rotation. The applicator function will be called for each block in the schematic.
      * <p>
@@ -164,7 +187,13 @@ public record Schematic(
         };
     }
 
-    public static @NotNull Block rotateBlock(@NotNull Block block, @NotNull SchematicRotation rotation) {
+    /**
+     * Rotates the block based on the rotation
+     * @param block The block to rotate
+     * @param rotation The rotation to apply
+     * @return The rotated block
+     */
+    private static @NotNull Block rotateBlock(@NotNull Block block, @NotNull SchematicRotation rotation) {
         if (rotation == SchematicRotation.NONE) return block;
 
         Block newBlock = block;
@@ -178,6 +207,7 @@ public record Schematic(
 
         return newBlock;
     }
+
 
     /**
      * Rotates blocks that have a "facing" property
