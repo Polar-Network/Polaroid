@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Polaroid.iml" filepath="$PROJECT_DIR$/Polaroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Polaroid.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Polaroid.main.iml" />
     </modules>
   </component>
 </project>
