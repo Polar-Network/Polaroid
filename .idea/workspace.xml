@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/modules/Polaroid.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/Polaroid.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +214,8 @@
       <workItem from="1675977048789" duration="271000" />
       <workItem from="1675990732536" duration="82000" />
       <workItem from="1675992016034" duration="101000" />
-      <workItem from="1676115870293" duration="483000" />
+      <workItem from="1676115870293" duration="1120000" />
+      <workItem from="1676117490695" duration="61000" />
     </task>
     <servers />
   </component>

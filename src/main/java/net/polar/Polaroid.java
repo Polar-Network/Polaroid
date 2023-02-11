@@ -138,6 +138,7 @@ public final class Polaroid {
      * Please keep in mind this only works if the proxy software has Bungee plugin channel support.
      * @param player - the player to send
      * @param proxyServerId - the id of the server to send the player to
+     * @throws IllegalStateException if the server is not in proxy mode
      */
     public static void sendPlayerToServer(@NotNull Player player, @NotNull String proxyServerId) {
         if (!proxySettings.enabled()) {
