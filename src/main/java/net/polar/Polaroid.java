@@ -1,7 +1,10 @@
 package net.polar;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.builder.Command;
+import net.minestom.server.entity.Player;
 import net.minestom.server.event.Event;
 import net.minestom.server.event.EventListener;
 import net.minestom.server.event.EventNode;
@@ -127,6 +130,26 @@ public final class Polaroid {
      */
     public static void registerCommands(@NotNull Command... commands) {
         Arrays.stream(commands).forEach(MinecraftServer.getCommandManager()::register);
+    }
+
+
+    /**
+     * Sends a connected player to a different server. Only works if the server is in proxy mode.
+     * Please keep in mind this only works if the proxy software has Bungee plugin channel support.
+     * @param player - the player to send
+     * @param proxyServerId - the id of the server to send the player to
+     */
+    public static void sendPlayerToServer(@NotNull Player player, @NotNull String proxyServerId) {
+        if (!proxySettings.enabled()) {
+            throw new IllegalStateException("Cannot send player to server if proxy mode is not enabled!");
+        }
+        if (debugMode) {
+            getLogger().info("Attempted sending player " + player.getUsername() + " to server " + proxyServerId);
+        }
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("Connect");
+        out.writeUTF(proxyServerId);
+        player.sendPluginMessage("BungeeCord", out.toByteArray());
     }
 
     /**

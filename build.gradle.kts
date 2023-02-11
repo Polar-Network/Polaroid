@@ -15,7 +15,7 @@ repositories {
 dependencies {
     api("com.github.Minestom:Minestom:-SNAPSHOT")
     api("net.kyori:adventure-text-minimessage:4.12.0")
-    api("ch.qos.logback:logback-classic:1.2.8")
+    api("com.google.guava:guava:30.1.1-jre")
 }
 
 tasks {
