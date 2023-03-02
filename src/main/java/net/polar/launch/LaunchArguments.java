@@ -21,43 +21,20 @@ public record LaunchArguments(
 
     /**
      * Parses launch arguments from the command line.
-     * @param args The command line arguments.
      * @return The parsed launch arguments.
      */
-    public static LaunchArguments parse(String[] args) {
+    public static LaunchArguments parse() {
 
-        String address = "0.0.0.0";
-        int port = 25565;
-        boolean debugMode = false;
-        boolean onlineMode = true;
-        boolean proxyEnabled = false;
-        String proxySecret = "";
+        String address = System.getenv("POLAROID_ADDRESS");
+        int port = Integer.parseInt(System.getenv("POLAROID_PORT"));
+        boolean debugMode = Boolean.parseBoolean(System.getenv("POLAROID_DEBUG"));
+        boolean onlineMode = Boolean.parseBoolean(System.getenv("POLAROID_ONLINE_MODE"));
+        boolean proxyEnabled = Boolean.parseBoolean(System.getenv("POLAROID_PROXY_ENABLED"));
+        String proxySecret = System.getenv("POLAROID_PROXY_SECRET");
 
-        for (String arg : args) {
-            if (arg.startsWith("--debug=")) {
-                debugMode = Boolean.parseBoolean(arg.replaceFirst("--debug=", ""));
-                continue;
-            }
-            if (arg.startsWith("--address=")) {
-                address = arg.replaceFirst("--address=", "");
-                continue;
-            }
-            if (arg.startsWith("--port=")) {
-                port = Integer.parseInt(arg.replaceFirst("--port=", ""));
-                continue;
-            }
-            if (arg.startsWith("--online-mode=")) {
-                onlineMode = Boolean.parseBoolean(arg.replaceFirst("--online-mode=", ""));
-                continue;
-            }
-            if (arg.startsWith("--proxy-enabled=")) {
-                proxyEnabled = Boolean.parseBoolean(arg.replaceFirst("--proxy-enabled=", ""));
-                continue;
-            }
-            if (arg.startsWith("--proxy-secret=")) {
-                proxySecret = arg.replaceFirst("--proxy-secret=", "");
-            }
-        }
+        if (address == null) address = "0.0.0.0";
+        if (port == 0) port = 25565;
+
         if (proxyEnabled && proxySecret.isEmpty()) {
             Polaroid.getLogger().error("Proxy is enabled but no secret was provided. Please provide a secret using the --proxy-secret flag. Disabling proxy.");
             proxyEnabled = false;

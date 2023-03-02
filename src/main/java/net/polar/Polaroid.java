@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * This is a wrapper for the {@link MinecraftServer} server.
@@ -40,7 +39,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public final class Polaroid {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Polaroid.class);
-    private static final AtomicBoolean INITIALIZED = new AtomicBoolean(false);
+    private static volatile boolean INITIALIZED = false;
     private static final EventNode<Event> EVENT_NODE = EventNode.all("Polaroid");
 
     private static boolean onlineMode;
@@ -57,11 +56,11 @@ public final class Polaroid {
         address = launchArguments.address();
         port = launchArguments.port();
         proxySettings = launchArguments.proxySettings();
-        INITIALIZED.set(true);
+        INITIALIZED = true;
     }
 
     private void onEnable() {
-        Check.stateCondition(!INITIALIZED.get(), "Polaroid has not been initialized yet!");
+        Check.stateCondition(!INITIALIZED, "Polaroid has not been initialized yet!");
 
         MinecraftServer server = MinecraftServer.init();
         defaultInstance = new TickTrackingInstanceContainer(UUID.randomUUID());
@@ -103,7 +102,7 @@ public final class Polaroid {
      * @param args - the arguments required for LaunchArgumentS class
      */
     public static void initServer(String... args) {
-        LaunchArguments launchArguments = LaunchArguments.parse(args);
+        LaunchArguments launchArguments = LaunchArguments.parse();
         Polaroid polaroid = new Polaroid(launchArguments);
         polaroid.onEnable();
     }
@@ -131,7 +130,6 @@ public final class Polaroid {
     public static void registerCommands(@NotNull Command... commands) {
         Arrays.stream(commands).forEach(MinecraftServer.getCommandManager()::register);
     }
-
 
     /**
      * Sends a connected player to a different server. Only works if the server is in proxy mode.
