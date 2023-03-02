@@ -138,7 +138,7 @@ public record Schematic(
      * @param rotation The rotation to apply to the schematic.
      * @return The used chunks
      */
-    public @NotNull long[] getAffectedChunksReflection(@NotNull SchematicRotation rotation, @NotNull Point startPoint) {
+    public long @NotNull [] getAffectedChunksReflection(@NotNull SchematicRotation rotation, @NotNull Point startPoint) {
         final AbsoluteBlockBatch batch = build(rotation, null).toAbsoluteBatch(startPoint.blockX(), startPoint.blockY(), startPoint.blockZ());
         final Field field;
         long[] chunks = new long[0];

@@ -16,6 +16,7 @@ import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.velocity.VelocityProxy;
 import net.minestom.server.ping.ResponseData;
 import net.minestom.server.utils.validate.Check;
+import net.polar.database.PolaroidDatabase;
 import net.polar.gui.Gui;
 import net.polar.gui.GuiClickable;
 import net.polar.launch.LaunchArguments;
@@ -33,7 +34,7 @@ import java.util.UUID;
 /**
  * This is a wrapper for the {@link MinecraftServer} server.
  * Internal methods are not documented.
- * {@link Polaroid#initServer(String...)} for the main method
+ * {@link Polaroid#initServer()} for the main method
  */
 @SuppressWarnings("unused")
 public final class Polaroid {
@@ -46,6 +47,7 @@ public final class Polaroid {
     private static boolean debugMode;
     private static String address;
     private static int port;
+    private static PolaroidDatabase database;
     private static ProxySettings proxySettings;
     private static TickTrackingInstanceContainer defaultInstance;
     private static MotdProvider motdProvider;
@@ -55,6 +57,7 @@ public final class Polaroid {
         debugMode = launchArguments.debugMode();
         address = launchArguments.address();
         port = launchArguments.port();
+        database = new PolaroidDatabase(launchArguments.mongoUri());
         proxySettings = launchArguments.proxySettings();
         INITIALIZED = true;
     }
@@ -99,9 +102,8 @@ public final class Polaroid {
     /**
      * Initializes the server with the given arguments.
      * Automatically builds {@link LaunchArguments}
-     * @param args - the arguments required for LaunchArgumentS class
      */
-    public static void initServer(String... args) {
+    public static void initServer() {
         LaunchArguments launchArguments = LaunchArguments.parse();
         Polaroid polaroid = new Polaroid(launchArguments);
         polaroid.onEnable();
@@ -192,6 +194,15 @@ public final class Polaroid {
     public static @NotNull Logger getLogger() {
         return LOGGER;
     }
+
+
+    /**
+     * @return the {@link PolaroidDatabase} instance for the server
+     */
+    public static @NotNull PolaroidDatabase getDatabase() {
+        return database;
+    }
+
 
     /**
      * @return the default {@link TickTrackingInstanceContainer} for the server.

@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
  * @param address The address to bind to.
  * @param port The port to bind to.
  * @param onlineMode Whether online mode is enabled.
+ * @param mongoUri The MongoDB URI.
  * @param proxySettings The proxy settings. {@link ProxySettings}
  */
 public record LaunchArguments(
@@ -16,6 +17,7 @@ public record LaunchArguments(
         @NotNull String address,
         int port,
         boolean onlineMode,
+        @NotNull String mongoUri,
         @NotNull ProxySettings proxySettings
 ) {
 
@@ -31,6 +33,7 @@ public record LaunchArguments(
         boolean onlineMode = Boolean.parseBoolean(System.getenv("POLAROID_ONLINE_MODE"));
         boolean proxyEnabled = Boolean.parseBoolean(System.getenv("POLAROID_PROXY_ENABLED"));
         String proxySecret = System.getenv("POLAROID_PROXY_SECRET");
+        String mongoUri = System.getenv("POLAROID_MONGO_URI");
 
         if (address == null) address = "0.0.0.0";
         if (port == 0) port = 25565;
@@ -44,7 +47,7 @@ public record LaunchArguments(
             onlineMode = false;
         }
         return new LaunchArguments(
-                debugMode, address, port, onlineMode, new ProxySettings(proxyEnabled, proxySecret)
+                debugMode, address, port, onlineMode, mongoUri, new ProxySettings(proxyEnabled, proxySecret)
         );
     }
 
