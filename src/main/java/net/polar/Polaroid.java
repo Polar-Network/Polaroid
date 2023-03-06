@@ -50,6 +50,7 @@ public final class Polaroid {
     private static boolean debugMode;
     private static String address;
     private static int port;
+    private static int maxPlayers;
     private static PolaroidDatabase database;
     private static ProxySettings proxySettings;
     private static TickTrackingInstanceContainer defaultInstance;
@@ -64,6 +65,7 @@ public final class Polaroid {
         port = Integer.parseInt(split[1]);
         database = new PolaroidDatabase(launchArguments.mongoUri());
         proxySettings = launchArguments.proxySettings();
+        maxPlayers = launchArguments.maxPlayers();
         INITIALIZED = true;
     }
 
@@ -263,5 +265,12 @@ public final class Polaroid {
      */
     public static @NotNull Path getLocalPath() {
         return LOCAL_PATH;
+    }
+
+    /**
+     * @return the amount of players the server can hold. This number is cosmetic frankly
+     */
+    public static int getMaxPlayers() {
+        return maxPlayers;
     }
 }

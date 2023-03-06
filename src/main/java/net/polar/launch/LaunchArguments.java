@@ -9,7 +9,6 @@ import net.polar.Polaroid;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-import java.util.List;
 
 /**
  * Launch Arguments used to start the server.
@@ -22,7 +21,6 @@ public class LaunchArguments {
     private final boolean onlineMode;
     private final int maxPlayers;
     private final boolean debug;
-    private final List<String> motd;
     private final ProxySettings proxySettings;
 
     /**
@@ -32,7 +30,6 @@ public class LaunchArguments {
      * @param onlineMode If online mode is enabled.
      * @param maxPlayers The maximum amount of players.
      * @param debug If debug mode is enabled.
-     * @param motd The MOTDs for the server.
      * @param proxySettings The proxy settings.
      */
     public LaunchArguments(
@@ -41,7 +38,6 @@ public class LaunchArguments {
             boolean onlineMode,
             int maxPlayers,
             boolean debug,
-            @NotNull List<String> motd,
             @NotNull ProxySettings proxySettings
     ) {
         this.host = host;
@@ -49,7 +45,6 @@ public class LaunchArguments {
         this.onlineMode = onlineMode;
         this.maxPlayers = maxPlayers;
         this.debug = debug;
-        this.motd = motd;
         this.proxySettings = proxySettings;
     }
 
@@ -60,7 +55,7 @@ public class LaunchArguments {
         this(
             "0.0.0.0:25565",
             "mongodb://localhost:27017",
-             true, 20, false, List.of(), new ProxySettings(false, "")
+             true, 20, false, new ProxySettings(false, "")
         );
     }
 
@@ -86,30 +81,44 @@ public class LaunchArguments {
         return args;
     }
 
+    /**
+     * @return the connection host. This contains both the IP and the port (ex: 0.0.0.0:25565)
+     */
     public String host() {
         return host;
     }
 
+    /**
+     * @return the MongoDB connection URI.
+     */
     public String mongoUri() {
         return mongoUri;
     }
 
+    /**
+     * @return if online mode is enabled.
+     */
     public boolean onlineMode() {
         return onlineMode;
     }
 
+    /**
+     * @return the maximum amount of players.
+     */
     public int maxPlayers() {
         return maxPlayers;
     }
 
+    /**
+     * @return if debug mode is enabled.
+     */
     public boolean debug() {
         return debug;
     }
 
-    public List<String> motd() {
-        return motd;
-    }
-
+    /**
+     * @return the proxy settings.
+     */
     public ProxySettings proxySettings() {
         return proxySettings;
     }
