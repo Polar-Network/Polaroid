@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Polaroid.iml" filepath="$PROJECT_DIR$/Polaroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Polaroid.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Polaroid.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Polaroid.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Polaroid.test.iml" />
     </modules>
   </component>
 </project>

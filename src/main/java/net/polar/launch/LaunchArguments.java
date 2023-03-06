@@ -1,14 +1,10 @@
 package net.polar.launch;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import net.polar.Polaroid;
+import net.polar.utils.JsonUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.File;
 
 /**
  * Launch Arguments used to start the server.
@@ -59,25 +55,18 @@ public class LaunchArguments {
         );
     }
 
-    private static final Gson GSON = new GsonBuilder()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES)
-            .create();
 
     /**
      * Parses launch arguments from the default config file.
      * @return The parsed launch arguments.
      */
-    public static LaunchArguments parse() throws IOException {
+    public static LaunchArguments defaults() {
         final File file = new File(Polaroid.getLocalPath().toFile(), "config.json");
-        if (file.exists()) {
-            return GSON.fromJson(new JsonReader(new FileReader(file)), LaunchArguments.class);
+        if (file.exists() && file.isFile()) {
+            return JsonUtils.read(file, LaunchArguments.class);
         }
         LaunchArguments args = new LaunchArguments(); // Default arguments
-        JsonWriter writer = new JsonWriter(new FileWriter(file));
-        writer.setLenient(true);
-        writer.setIndent("  ");
-        GSON.toJson(args, LaunchArguments.class, writer);
-        writer.close();
+        JsonUtils.prettyWrite(args, LaunchArguments.class, file);
         return args;
     }
 

@@ -28,8 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.UUID;
@@ -111,14 +109,8 @@ public final class Polaroid {
      * Automatically builds {@link LaunchArguments}
      */
     public static void initServer() {
-        try {
-            LaunchArguments args = LaunchArguments.parse();
-            initServer(args);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
+        Polaroid polaroid = new Polaroid(LaunchArguments.defaults());
+        polaroid.onEnable();
     }
 
     /**
