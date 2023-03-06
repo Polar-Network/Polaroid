@@ -11,6 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.util.List;
 
+/**
+ * Launch Arguments used to start the server.
+ * This class is not a record due to Gson having issues with records.
+ */
 public class LaunchArguments {
 
     private final String host;
@@ -21,6 +25,16 @@ public class LaunchArguments {
     private final List<String> motd;
     private final ProxySettings proxySettings;
 
+    /**
+     * Creates a new launch arguments instance.
+     * @param host The host to bind to.
+     * @param mongoUri The MongoDB URI.
+     * @param onlineMode If online mode is enabled.
+     * @param maxPlayers The maximum amount of players.
+     * @param debug If debug mode is enabled.
+     * @param motd The MOTDs for the server.
+     * @param proxySettings The proxy settings.
+     */
     public LaunchArguments(
             @NotNull String host,
             @NotNull String mongoUri,
@@ -39,6 +53,9 @@ public class LaunchArguments {
         this.proxySettings = proxySettings;
     }
 
+    /**
+     * Creates a new launch arguments instance with default values.
+     */
     public LaunchArguments() {
         this(
             "0.0.0.0:25565",
