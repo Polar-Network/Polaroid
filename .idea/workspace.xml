@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/Polaroid.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/Polaroid.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/launch/LaunchArguments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/launch/LaunchArguments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/player/PolaroidPlayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/profiler/ServerProfiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/profiler/ServerProfiler.java" afterDir="false" />
-    </list>
+    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -232,7 +224,7 @@
       <workItem from="1677846758037" duration="1883000" />
       <workItem from="1677955656793" duration="468000" />
       <workItem from="1678007457394" duration="1391000" />
-      <workItem from="1678043837893" duration="2566000" />
+      <workItem from="1678043837893" duration="2758000" />
     </task>
     <servers />
   </component>

@@ -4,11 +4,11 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import net.polar.Polaroid;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.List;
 
 public class LaunchArguments {
@@ -61,7 +61,11 @@ public class LaunchArguments {
             return GSON.fromJson(new JsonReader(new FileReader(file)), LaunchArguments.class);
         }
         LaunchArguments args = new LaunchArguments(); // Default arguments
-        Files.write(file.toPath(), GSON.toJson(args).getBytes());
+        JsonWriter writer = new JsonWriter(new FileWriter(file));
+        writer.setLenient(true);
+        writer.setIndent("  ");
+        GSON.toJson(args, LaunchArguments.class, writer);
+        writer.close();
         return args;
     }
 
