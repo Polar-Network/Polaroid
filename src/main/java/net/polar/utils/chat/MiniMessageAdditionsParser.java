@@ -54,5 +54,16 @@ public class MiniMessageAdditionsParser {
         return resolver.build();
     }
 
-    private record MiniMessageTag(String name, String replacement) { }
+    private static class MiniMessageTag {
+
+        private final String name;
+        private final String replacement;
+
+        public MiniMessageTag(String name, String replacement) {
+            this.name = name;
+            this.replacement = replacement;
+        }
+
+    }
+    
 }

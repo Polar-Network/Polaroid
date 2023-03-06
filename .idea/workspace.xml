@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/net.polar.Polaroid.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/test/Polaroid.test.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/test/Polaroid.test.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/MultiLineHologram.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/MiniMessageAdditionsParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/shapes/Cuboid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/src/main/java/net/polar/test/TestServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/gui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/gui/Gui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/motd/MotdProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/motd/MotdProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/profiler/ServerProfiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/profiler/ServerProfiler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/ChatColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/ChatColor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/JsonUtils.java" afterDir="false" />
-    </list>
+    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,29 +81,29 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "go.import.settings.migrated": "true",
-    "jdk.selected.JAVA_MODULE": "corretto-17",
-    "last_opened_file_path": "C:/Github/PolarNetwork/Polaroid/test/server/test-1.0-SNAPSHOT.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "1ebacd7ad2842991369503f54afc31de",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Github/PolarNetwork/Polaroid/test/server/test-1.0-SNAPSHOT.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;1ebacd7ad2842991369503f54afc31de&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="JAR Application.Build &amp; Test">
     <configuration name="Polaroid [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -278,7 +260,7 @@
       <workItem from="1678094125932" duration="19000" />
       <workItem from="1678095244105" duration="1408000" />
       <workItem from="1678097644503" duration="1329000" />
-      <workItem from="1678108278067" duration="5789000" />
+      <workItem from="1678108278067" duration="5807000" />
     </task>
     <servers />
   </component>
