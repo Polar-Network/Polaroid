@@ -24,16 +24,25 @@ public final class ServerProfiler {
     private static final AtomicReference<TickMonitor> lastTick = new AtomicReference<>();
     private static final long byteToMBConstant = 1024 * 1024;
 
+
+    /**
+     * Initializes the server profiler.
+     * This method has no safety checks, so it is recommended to only call this method once.
+     */
     public static void init() {
         MinecraftServer.getGlobalEventHandler().addListener(ServerTickMonitorEvent.class, event -> {
             lastTick.set(event.getTickMonitor());
         });
     }
 
+    /**
+     * Gets server profiler data from the server, this includes recent GC calls, memory used/free/total, MS per tick, TPS and more.
+     * @return The server profiler data.
+     */
     public static Component getServerProfilerData() {
         StringBuilder sb = new StringBuilder();
         sb.append("<gray>Server Profiler:\n")
-                .append("  TPS: ").append("<" + getTPSHex() + ">").append(getTPS()).append("<gray> | Last Tick MS: ").append("<" + getTPSHex() + ">").append(getTickMS()).append("<gray>\n")
+                .append("  TPS: ").append("<").append(getTPSHex()).append(">").append(getTPS()).append("<gray> | Last Tick MS: ").append("<").append(getTPSHex()).append(">").append(getTickMS()).append("<gray>\n")
                 .append("  Online: <gold>").append(MinecraftServer.getConnectionManager().getOnlinePlayers().size()).append("<gold>\n")
                 .append("  Uptime: <gold>").append(getUptimeReadable()).append("<gray>\n")
                 .append("  Memory Usage: <gold>").append(getUsedMemory()).append(" MB <gray>(").append(getUsedRamPercentage()).append("%)<gray>\n")

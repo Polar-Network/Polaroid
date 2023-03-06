@@ -15,6 +15,7 @@ import net.minestom.server.event.server.ServerListPingEvent;
 import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.velocity.VelocityProxy;
 import net.minestom.server.ping.ResponseData;
+import net.minestom.server.timer.Task;
 import net.minestom.server.utils.validate.Check;
 import net.polar.database.PolaroidDatabase;
 import net.polar.gui.Gui;
@@ -28,6 +29,8 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -42,7 +45,7 @@ public final class Polaroid {
     private static final Logger LOGGER = LoggerFactory.getLogger(Polaroid.class);
     private static volatile boolean INITIALIZED = false;
     private static final EventNode<Event> EVENT_NODE = EventNode.all("Polaroid");
-
+    private static final Path LOCAL_PATH = Path.of(".");
     private static boolean onlineMode;
     private static boolean debugMode;
     private static String address;
@@ -54,9 +57,11 @@ public final class Polaroid {
 
     private Polaroid(@NotNull LaunchArguments launchArguments) {
         onlineMode = launchArguments.onlineMode();
-        debugMode = launchArguments.debugMode();
-        address = launchArguments.address();
-        port = launchArguments.port();
+        debugMode = launchArguments.debug();
+        String host = launchArguments.host();
+        String[] split = host.split(":");
+        address = split[0];
+        port = Integer.parseInt(split[1]);
         database = new PolaroidDatabase(launchArguments.mongoUri());
         proxySettings = launchArguments.proxySettings();
         INITIALIZED = true;
@@ -104,8 +109,22 @@ public final class Polaroid {
      * Automatically builds {@link LaunchArguments}
      */
     public static void initServer() {
-        LaunchArguments launchArguments = LaunchArguments.parse();
-        Polaroid polaroid = new Polaroid(launchArguments);
+        try {
+            LaunchArguments args = LaunchArguments.parse();
+            initServer(args);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    /**
+     * Initializes the server with the given arguments.
+     * @param arguments - the arguments to use
+     */
+    public static void initServer(@NotNull LaunchArguments arguments) {
+        Polaroid polaroid = new Polaroid(arguments);
         polaroid.onEnable();
     }
 
@@ -151,6 +170,10 @@ public final class Polaroid {
         out.writeUTF("Connect");
         out.writeUTF(proxyServerId);
         player.sendPluginMessage("BungeeCord", out.toByteArray());
+    }
+
+    public static @NotNull Task.Builder buildTask(@NotNull Runnable runnable) {
+        return MinecraftServer.getSchedulerManager().buildTask(runnable);
     }
 
     /**
@@ -235,4 +258,10 @@ public final class Polaroid {
         motdProvider = provider;
     }
 
+    /**
+     * @return the {@link Path} to the local Polaroid directory (where the server is running from)
+     */
+    public static @NotNull Path getLocalPath() {
+        return LOCAL_PATH;
+    }
 }
