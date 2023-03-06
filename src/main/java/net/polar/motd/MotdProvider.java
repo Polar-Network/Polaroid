@@ -2,7 +2,7 @@ package net.polar.motd;
 
 import net.minestom.server.ping.ResponseData;
 import net.polar.Polaroid;
-import net.polar.utils.ChatColor;
+import net.polar.utils.chat.ChatColor;
 import org.jetbrains.annotations.NotNull;
 
 /**

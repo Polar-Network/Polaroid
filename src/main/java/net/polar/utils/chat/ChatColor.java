@@ -1,4 +1,4 @@
-package net.polar.utils;
+package net.polar.utils.chat;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -15,7 +15,9 @@ import java.util.stream.Collectors;
 public final class ChatColor {
 
     private ChatColor() {}
-    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
+    private static final MiniMessage miniMessage = MiniMessage.builder()
+            .tags(MiniMessageAdditionsParser.getAdditionsFromFile())
+            .build();
 
     /**
      * Translates a string into a {@link Component}.

@@ -9,7 +9,7 @@ import net.minestom.server.MinecraftServer;
 import net.minestom.server.event.server.ServerTickMonitorEvent;
 import net.minestom.server.monitoring.TickMonitor;
 import net.minestom.server.utils.time.TimeUnit;
-import net.polar.utils.ChatColor;
+import net.polar.utils.chat.ChatColor;
 
 import java.lang.management.ManagementFactory;
 import java.time.Duration;

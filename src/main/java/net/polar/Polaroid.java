@@ -2,6 +2,7 @@ package net.polar;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.builder.Command;
 import net.minestom.server.entity.Player;
@@ -23,11 +24,10 @@ import net.polar.gui.GuiClickable;
 import net.polar.launch.LaunchArguments;
 import net.polar.launch.ProxySettings;
 import net.polar.motd.MotdProvider;
+import net.polar.utils.chat.ChatColor;
 import net.polar.world.TickTrackingInstanceContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.UUID;
@@ -40,8 +40,7 @@ import java.util.UUID;
 @SuppressWarnings("unused")
 public final class Polaroid {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Polaroid.class);
-    private static volatile boolean INITIALIZED = false;
+    private static final ComponentLogger LOGGER = ComponentLogger.logger(Polaroid.class);
     private static final EventNode<Event> EVENT_NODE = EventNode.all("Polaroid");
     private static final Path LOCAL_PATH = Path.of(".");
     private static boolean onlineMode;
@@ -64,11 +63,6 @@ public final class Polaroid {
         database = new PolaroidDatabase(launchArguments.mongoUri());
         proxySettings = launchArguments.proxySettings();
         maxPlayers = launchArguments.maxPlayers();
-        INITIALIZED = true;
-    }
-
-    private void onEnable() {
-        Check.stateCondition(!INITIALIZED, "Polaroid has not been initialized yet!");
 
         MinecraftServer server = MinecraftServer.init();
         defaultInstance = new TickTrackingInstanceContainer(UUID.randomUUID());
@@ -81,7 +75,7 @@ public final class Polaroid {
         MinecraftServer.getGlobalEventHandler().addChild(EVENT_NODE);
 
         server.start(address, port);
-        getLogger().info("Polaroid initialized on address " + address + ":" + port);
+        getLogger().info(ChatColor.color("<green>Polaroid initialized on address " + address + ":" + port));
     }
 
     private void registerInternalListeners() {
@@ -109,8 +103,7 @@ public final class Polaroid {
      * Automatically builds {@link LaunchArguments}
      */
     public static void initServer() {
-        Polaroid polaroid = new Polaroid(LaunchArguments.defaults());
-        polaroid.onEnable();
+        initServer(LaunchArguments.defaults());
     }
 
     /**
@@ -119,7 +112,6 @@ public final class Polaroid {
      */
     public static void initServer(@NotNull LaunchArguments arguments) {
         Polaroid polaroid = new Polaroid(arguments);
-        polaroid.onEnable();
     }
 
     /**
@@ -158,7 +150,7 @@ public final class Polaroid {
             throw new IllegalStateException("Cannot send player to server if proxy mode is not enabled!");
         }
         if (debugMode) {
-            getLogger().info("Attempted sending player " + player.getUsername() + " to server " + proxyServerId);
+            getLogger().info(ChatColor.color("<blue>Attempted sending player " + player.getUsername() + " to server " + proxyServerId));
         }
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Connect");
@@ -206,9 +198,9 @@ public final class Polaroid {
     }
 
     /**
-     * @return the SLF4J Logger instance for Polaroid
+     * @return the SLF4J Logger instance for Polaroid. This uses {@link ComponentLogger} for components.
      */
-    public static @NotNull Logger getLogger() {
+    public static @NotNull ComponentLogger getLogger() {
         return LOGGER;
     }
 

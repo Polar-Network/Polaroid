@@ -11,7 +11,7 @@ import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
 import net.polar.gui.pattern.BasicGuiPatterns;
 import net.polar.gui.pattern.GuiPattern;
-import net.polar.utils.ChatColor;
+import net.polar.utils.chat.ChatColor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

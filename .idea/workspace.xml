@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/JsonUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/net.polar.Polaroid.test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/test/Polaroid.test.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/test/Polaroid.test.test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/MultiLineHologram.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/MiniMessageAdditionsParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/shapes/Cuboid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/net/polar/test/TestServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/launch/LaunchArguments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/launch/LaunchArguments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/gui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/gui/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/motd/MotdProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/motd/MotdProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/profiler/ServerProfiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/profiler/ServerProfiler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/ChatColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/ChatColor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/JsonUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +39,9 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/test">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -37,13 +52,20 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Polaroid" type="f1a62948:ProjectNode" />
+                <item name="test" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Polaroid" type="f1a62948:ProjectNode" />
+                <item name="test" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Polaroid" type="f1a62948:ProjectNode" />
+                <item name="test" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
+                <item name="shadow" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -87,51 +109,20 @@
     "WebServerToolWindowFactoryState": "false",
     "go.import.settings.migrated": "true",
     "jdk.selected.JAVA_MODULE": "corretto-17",
-    "last_opened_file_path": "C:/Github/PolarNetwork/LuckPerms",
+    "last_opened_file_path": "C:/Github/PolarNetwork/Polaroid/test/server/test-1.0-SNAPSHOT.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "spring.configuration.checksum": "1ebacd7ad2842991369503f54afc31de",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.PolaroidTestServer">
-    <configuration name="PolaroidTestServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="net.polar.test.PolaroidTestServer" />
-      <module name="Polaroid.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="net.polar.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Polaroid [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="JAR Application.Build &amp; Test">
     <configuration name="Polaroid [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -195,13 +186,48 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="Polaroid:test [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/test" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="shadowJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Build &amp; Test" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/test/server/test-1.0-SNAPSHOT.jar" />
+      <option name="WORKING_DIRECTORY" value="C:\Github\PolarNetwork\Polaroid\test\server\" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Gradle.BeforeRunTask" enabled="true" tasks="shadowJar" externalProjectPath="$PROJECT_DIR$/test" vmOptions="" scriptParameters="" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.Polaroid [jar]" />
+      <item itemvalue="Gradle.Polaroid [javadocJar]" />
+      <item itemvalue="Gradle.Polaroid [sourcesJar]" />
+      <item itemvalue="Gradle.Polaroid:test [shadowJar]" />
+      <item itemvalue="JAR Application.Build &amp; Test" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.PolaroidTestServer" />
+        <item itemvalue="Gradle.Polaroid:test [shadowJar]" />
         <item itemvalue="Gradle.Polaroid [sourcesJar]" />
         <item itemvalue="Gradle.Polaroid [javadocJar]" />
         <item itemvalue="Gradle.Polaroid [jar]" />
-        <item itemvalue="Gradle.Polaroid [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -250,7 +276,9 @@
       <workItem from="1678093263644" duration="585000" />
       <workItem from="1678093970530" duration="131000" />
       <workItem from="1678094125932" duration="19000" />
-      <workItem from="1678095244105" duration="1383000" />
+      <workItem from="1678095244105" duration="1408000" />
+      <workItem from="1678097644503" duration="1329000" />
+      <workItem from="1678108278067" duration="5789000" />
     </task>
     <servers />
   </component>
