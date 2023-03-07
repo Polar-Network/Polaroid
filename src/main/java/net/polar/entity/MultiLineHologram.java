@@ -77,4 +77,11 @@ public class MultiLineHologram {
         }
     }
 
+    public void teleportSmoothly(Pos position) {
+        for (int i = 0; i < entities.size(); i++) {
+            Entity entity = entities.get(i);
+            double yLevel = 0.5 + (0.3 * (lines.size() - i));
+            entity.teleport(position.add(0, yLevel, 0));
+        }
+    }
 }

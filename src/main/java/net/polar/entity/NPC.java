@@ -12,15 +12,19 @@ import net.minestom.server.entity.pathfinding.Navigator;
 import net.minestom.server.event.player.PlayerEntityInteractEvent;
 import net.minestom.server.instance.Instance;
 import net.minestom.server.network.packet.server.play.PlayerInfoPacket;
+import net.minestom.server.network.packet.server.play.TeamsPacket;
 import net.minestom.server.network.player.PlayerConnection;
 import org.jetbrains.annotations.NotNull;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 public class NPC extends LivingEntity implements NavigableEntity {
+
+    private static final TeamsPacket createTeamPacket = MinecraftServer.getTeamManager().createBuilder("npcTeam")
+            .nameTagVisibility(TeamsPacket.NameTagVisibility.NEVER)
+            .build().createTeamsCreationPacket();
 
 
     private final @NotNull Navigator navigator = new Navigator(this);
@@ -30,7 +34,8 @@ public class NPC extends LivingEntity implements NavigableEntity {
     private final @NotNull PlayerInfoPacket PLAYER_ADD_INFO;
     private final @NotNull PlayerInfoPacket PLAYER_HIDE_INFO;
     private final @NotNull PlayerSkin skin;
-    private final @NotNull List<String> displayName;
+    private final MultiLineHologram hologram;
+    private final @NotNull TeamsPacket teamPacket;
 
     public NPC(
             @NotNull UUID uuid,
@@ -43,11 +48,12 @@ public class NPC extends LivingEntity implements NavigableEntity {
         super(EntityType.PLAYER, uuid);
         this.id = id;
         this.homePosition = homePosition;
-        this.displayName = displayName;
+        this.hologram = new MultiLineHologram(displayName);
         this.skin = skin;
         this.name = username.substring(0, Math.min(username.length(), 16));
         this.PLAYER_ADD_INFO = generatePlayerAddInfo();
         this.PLAYER_HIDE_INFO = generatePlayerHideInfo();
+        this.teamPacket = new TeamsPacket("npcTeam", new TeamsPacket.AddEntitiesToTeamAction(List.of(getUuid().toString())));
     }
 
     /**
@@ -78,15 +84,19 @@ public class NPC extends LivingEntity implements NavigableEntity {
     @Override
     public void update(long time) {
         super.update(time);
-        // Path finding
-        this.navigator.tick();
+        this.navigator.tick(); // Pathfinding
+        if (previousPosition != position) {
+            hologram.teleportSmoothly(position.add(0, 1, 0));
+        }
+
     }
 
     @Override
     public CompletableFuture<Void> setInstance(@NotNull Instance instance, @NotNull Pos spawnPosition) {
         this.navigator.setPathFinder(new HydrazinePathFinder(navigator.getPathingEntity(), instance.getInstanceSpace()));
         return super.setInstance(instance, spawnPosition).thenRun(() -> {
-            new MultiLineHologram(displayName).ride(instance, this);
+            hologram.remove();
+            hologram.create(instance, getHomePosition().add(0, 1, 0));
         });
     }
 
@@ -111,6 +121,8 @@ public class NPC extends LivingEntity implements NavigableEntity {
     public void updateNewViewer(@NotNull Player player) {
         final PlayerConnection connection = player.getPlayerConnection();
         connection.sendPacket(PLAYER_ADD_INFO);
+        connection.sendPacket(teamPacket);
+
         // Hide npc from tablist
         // This needs to be delayed, otherwise the player does not render.
         this.scheduleNextTick((ignored) -> connection.sendPacket(PLAYER_HIDE_INFO));
