@@ -14,8 +14,6 @@ import java.util.List;
  * A class for parsing MiniMessage additions
  */
 public class MiniMessageAdditionsParser {
-
-
     private MiniMessageAdditionsParser() {}
 
     /**
@@ -55,7 +53,6 @@ public class MiniMessageAdditionsParser {
     }
 
     private static class MiniMessageTag {
-
         private final String name;
         private final String replacement;
 
@@ -63,7 +60,5 @@ public class MiniMessageAdditionsParser {
             this.name = name;
             this.replacement = replacement;
         }
-
     }
-    
 }
