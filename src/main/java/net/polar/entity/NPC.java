@@ -3,7 +3,6 @@ package net.polar.entity;
 import com.extollit.gaming.ai.path.HydrazinePathFinder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
-import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.*;
 import net.minestom.server.entity.metadata.PlayerMeta;
@@ -21,11 +20,6 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 public class NPC extends LivingEntity implements NavigableEntity {
-
-    private static final TeamsPacket createTeamPacket = MinecraftServer.getTeamManager().createBuilder("npcTeam")
-            .nameTagVisibility(TeamsPacket.NameTagVisibility.NEVER)
-            .build().createTeamsCreationPacket();
-
 
     private final @NotNull Navigator navigator = new Navigator(this);
     private final @NotNull String id;

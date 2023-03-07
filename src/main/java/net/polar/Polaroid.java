@@ -12,9 +12,11 @@ import net.minestom.server.event.EventNode;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.inventory.InventoryPreClickEvent;
 import net.minestom.server.event.player.PlayerLoginEvent;
+import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.event.server.ServerListPingEvent;
 import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.velocity.VelocityProxy;
+import net.minestom.server.network.packet.server.play.TeamsPacket;
 import net.minestom.server.ping.ResponseData;
 import net.minestom.server.timer.Task;
 import net.minestom.server.utils.validate.Check;
@@ -31,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 /**
  * This is a wrapper for the {@link MinecraftServer} server.
@@ -41,6 +44,9 @@ import java.util.UUID;
 public final class Polaroid {
 
     private static final ComponentLogger LOGGER = ComponentLogger.logger(Polaroid.class);
+    private static final TeamsPacket CREATE_TEAM_PACKET = MinecraftServer.getTeamManager().createBuilder("npcTeam")
+            .nameTagVisibility(TeamsPacket.NameTagVisibility.NEVER)
+            .build().createTeamsCreationPacket();
     private static final EventNode<Event> EVENT_NODE = EventNode.all("Polaroid");
     private static final Path LOCAL_PATH = Path.of(".");
     private static boolean onlineMode;
@@ -96,6 +102,7 @@ public final class Polaroid {
             GuiClickable clickable = gui.getClickableAt(event.getSlot());
             if (clickable != null) clickable.onClick(event.getClickType(), event.getPlayer());
         });
+        eh.addListener(PlayerSpawnEvent.class, event -> event.getPlayer().sendPacket(CREATE_TEAM_PACKET));
     }
 
     /**
