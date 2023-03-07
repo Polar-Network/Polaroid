@@ -42,6 +42,14 @@ public class MultiLineHologram {
         this.setLine(index, ChatColor.color(line));
     }
 
+    public void addLine(@NotNull Component line) {
+        this.setLine(lines.size(), line);
+    }
+
+    public void addLine(@NotNull String line) {
+        this.addLine(ChatColor.color(line));
+    }
+
     public void create(@NotNull Instance instance, @NotNull Pos position) {
         for (int i = 0; i < lines.size(); i++) {
             Entity entity = new Entity(EntityType.ARMOR_STAND);
