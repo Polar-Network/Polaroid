@@ -44,7 +44,6 @@ import java.util.function.Consumer;
 public final class Polaroid {
 
     private static final ComponentLogger LOGGER = ComponentLogger.logger(Polaroid.class);
-    private static TeamsPacket CREATE_TEAM_PACKET;
     private static final EventNode<Event> EVENT_NODE = EventNode.all("Polaroid");
     private static final Path LOCAL_PATH = Path.of(".");
     private static boolean onlineMode;
@@ -72,9 +71,6 @@ public final class Polaroid {
         defaultInstance = new TickTrackingInstanceContainer(UUID.randomUUID());
         MinecraftServer.getDimensionTypeManager().addDimension(TickTrackingInstanceContainer.FULLBRIGHT_DIMENSION);
         MinecraftServer.setBrandName("Polaroid");
-        CREATE_TEAM_PACKET = MinecraftServer.getTeamManager().createBuilder("npcTeam")
-                .nameTagVisibility(TeamsPacket.NameTagVisibility.NEVER)
-                .build().createTeamsCreationPacket();
 
         if (onlineMode) {MojangAuth.init();}
         if (proxySettings.enabled()) {VelocityProxy.enable(proxySettings.secret());}
@@ -103,7 +99,6 @@ public final class Polaroid {
             GuiClickable clickable = gui.getClickableAt(event.getSlot());
             if (clickable != null) clickable.onClick(event.getClickType(), event.getPlayer());
         });
-        eh.addListener(PlayerSpawnEvent.class, event -> event.getPlayer().sendPacket(CREATE_TEAM_PACKET));
     }
 
     /**

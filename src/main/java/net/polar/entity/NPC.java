@@ -3,6 +3,7 @@ package net.polar.entity;
 import com.extollit.gaming.ai.path.HydrazinePathFinder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.*;
 import net.minestom.server.entity.metadata.PlayerMeta;
@@ -13,6 +14,7 @@ import net.minestom.server.instance.Instance;
 import net.minestom.server.network.packet.server.play.PlayerInfoPacket;
 import net.minestom.server.network.packet.server.play.TeamsPacket;
 import net.minestom.server.network.player.PlayerConnection;
+import net.minestom.server.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -20,6 +22,10 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 public class NPC extends LivingEntity implements NavigableEntity {
+
+    private static final Team TEAM = MinecraftServer.getTeamManager().createBuilder("npcTeam")
+            .nameTagVisibility(TeamsPacket.NameTagVisibility.NEVER)
+            .build();
 
     private final @NotNull Navigator navigator = new Navigator(this);
     private final @NotNull String id;
@@ -48,6 +54,7 @@ public class NPC extends LivingEntity implements NavigableEntity {
         this.PLAYER_ADD_INFO = generatePlayerAddInfo();
         this.PLAYER_HIDE_INFO = generatePlayerHideInfo();
         this.teamPacket = new TeamsPacket("npcTeam", new TeamsPacket.AddEntitiesToTeamAction(List.of(getUuid().toString())));
+        setTeam(TEAM);
     }
 
     /**
