@@ -43,7 +43,6 @@ public class MultiLineHologram {
     }
 
     public void create(@NotNull Instance instance, @NotNull Pos position) {
-
         for (int i = 0; i < lines.size(); i++) {
             Entity entity = new Entity(EntityType.ARMOR_STAND);
             ArmorStandMeta meta = (ArmorStandMeta) entity.getEntityMeta();
@@ -63,8 +62,19 @@ public class MultiLineHologram {
             double yLevel = 0.5 + (0.3 * (lines.size() - i));
             entity.setInstance(instance, position.add(0, yLevel, 0)).thenRun(() -> entities.add(entity));
         }
-
     }
 
+    public void ride(@NotNull Instance instance, @NotNull Entity toRide) {
+        create(instance, toRide.getPosition());
+        for (int i = 0; i < entities.size(); i++) {
+            Entity entity = entities.get(i);
+            if (i == 0) {
+                toRide.addPassenger(entity);
+            }
+            else {
+                entities.get(i - 1).addPassenger(entity);
+            }
+        }
+    }
 
 }

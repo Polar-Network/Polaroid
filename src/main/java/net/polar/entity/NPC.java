@@ -3,6 +3,7 @@ package net.polar.entity;
 import com.extollit.gaming.ai.path.HydrazinePathFinder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.*;
 import net.minestom.server.entity.metadata.PlayerMeta;
@@ -14,6 +15,7 @@ import net.minestom.server.network.packet.server.play.PlayerInfoPacket;
 import net.minestom.server.network.player.PlayerConnection;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -28,23 +30,24 @@ public class NPC extends LivingEntity implements NavigableEntity {
     private final @NotNull PlayerInfoPacket PLAYER_ADD_INFO;
     private final @NotNull PlayerInfoPacket PLAYER_HIDE_INFO;
     private final @NotNull PlayerSkin skin;
+    private final @NotNull List<String> displayName;
 
     public NPC(
             @NotNull UUID uuid,
             @NotNull String id,
             @NotNull Pos homePosition,
             @NotNull PlayerSkin skin,
-            @NotNull TextComponent displayName
+            @NotNull String username,
+            @NotNull List<String> displayName
     ) {
         super(EntityType.PLAYER, uuid);
         this.id = id;
         this.homePosition = homePosition;
-        final String name = displayName.content();
+        this.displayName = displayName;
         this.skin = skin;
-        this.name = name.substring(0, Math.min(name.length(), 16));
+        this.name = username.substring(0, Math.min(username.length(), 16));
         this.PLAYER_ADD_INFO = generatePlayerAddInfo();
         this.PLAYER_HIDE_INFO = generatePlayerHideInfo();
-        this.setCustomName(displayName);
     }
 
     /**
@@ -82,7 +85,9 @@ public class NPC extends LivingEntity implements NavigableEntity {
     @Override
     public CompletableFuture<Void> setInstance(@NotNull Instance instance, @NotNull Pos spawnPosition) {
         this.navigator.setPathFinder(new HydrazinePathFinder(navigator.getPathingEntity(), instance.getInstanceSpace()));
-        return super.setInstance(instance, spawnPosition);
+        return super.setInstance(instance, spawnPosition).thenRun(() -> {
+            new MultiLineHologram(displayName).ride(instance, this);
+        });
     }
 
     private @NotNull PlayerInfoPacket generatePlayerAddInfo() {
