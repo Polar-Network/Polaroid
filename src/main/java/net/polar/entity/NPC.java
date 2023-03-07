@@ -4,10 +4,8 @@ import com.extollit.gaming.ai.path.HydrazinePathFinder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.minestom.server.coordinate.Pos;
-import net.minestom.server.entity.EntityType;
-import net.minestom.server.entity.GameMode;
-import net.minestom.server.entity.LivingEntity;
-import net.minestom.server.entity.Player;
+import net.minestom.server.entity.*;
+import net.minestom.server.entity.metadata.PlayerMeta;
 import net.minestom.server.entity.pathfinding.NavigableEntity;
 import net.minestom.server.entity.pathfinding.Navigator;
 import net.minestom.server.event.player.PlayerEntityInteractEvent;
@@ -29,17 +27,20 @@ public class NPC extends LivingEntity implements NavigableEntity {
     private final @NotNull String name;
     private final @NotNull PlayerInfoPacket PLAYER_ADD_INFO;
     private final @NotNull PlayerInfoPacket PLAYER_HIDE_INFO;
+    private final @NotNull PlayerSkin skin;
 
     public NPC(
             @NotNull UUID uuid,
             @NotNull String id,
             @NotNull Pos homePosition,
+            @NotNull PlayerSkin skin,
             @NotNull TextComponent displayName
     ) {
         super(EntityType.PLAYER, uuid);
         this.id = id;
         this.homePosition = homePosition;
         final String name = displayName.content();
+        this.skin = skin;
         this.name = name.substring(0, Math.min(name.length(), 16));
         this.PLAYER_ADD_INFO = generatePlayerAddInfo();
         this.PLAYER_HIDE_INFO = generatePlayerHideInfo();
@@ -63,8 +64,7 @@ public class NPC extends LivingEntity implements NavigableEntity {
     /**
      * This is run whenever a player interacts with this npc
      */
-    public void onInteract(PlayerEntityInteractEvent event) {
-    }
+    public void onInteract(PlayerEntityInteractEvent event) {}
 
     @NotNull
     @Override
@@ -91,7 +91,7 @@ public class NPC extends LivingEntity implements NavigableEntity {
 
         return new PlayerInfoPacket(
                 PlayerInfoPacket.Action.ADD_PLAYER,
-                List.of(new PlayerInfoPacket.AddPlayer(uuid, name, List.of(), GameMode.CREATIVE, 0, displayName, null))
+                List.of(new PlayerInfoPacket.AddPlayer(uuid, name, List.of(new PlayerInfoPacket.AddPlayer.Property("textures",skin.textures(),skin.signature())), GameMode.CREATIVE, 0, displayName, null))
         );
     }
 
@@ -111,6 +111,22 @@ public class NPC extends LivingEntity implements NavigableEntity {
         this.scheduleNextTick((ignored) -> connection.sendPacket(PLAYER_HIDE_INFO));
         super.updateNewViewer(player);
     }
+
+    public void enableFullSkinProperties() {
+        var meta = (PlayerMeta) getEntityMeta();
+        meta.setNotifyAboutChanges(false);
+
+        meta.setCapeEnabled(true);
+        meta.setHatEnabled(true);
+        meta.setJacketEnabled(true);
+        meta.setLeftLegEnabled(true);
+        meta.setLeftSleeveEnabled(true);
+        meta.setRightLegEnabled(true);
+        meta.setRightSleeveEnabled(true);
+
+        meta.setNotifyAboutChanges(true);
+    }
+
 
     public interface Supplier {
         @NotNull NPC create(
