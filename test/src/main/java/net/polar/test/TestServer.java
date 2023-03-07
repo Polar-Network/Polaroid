@@ -27,6 +27,7 @@ public final class TestServer {
            event.getPlayer().setFlying(true);
         });
         eh.addListener(EntityDamageEvent.class, event -> event.setCancelled(true));
+        new NPC("amoguys", PlayerSkin.fromUsername("Tofaa"), List.of("<red>Woah", "<green>It's", "<blue>an", "<yellow>npc")).properlySpawn(Pos.ZERO, Polaroid.getDefaultInstance());
     }
 
 }

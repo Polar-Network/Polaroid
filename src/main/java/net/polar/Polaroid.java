@@ -11,16 +11,16 @@ import net.minestom.server.event.EventListener;
 import net.minestom.server.event.EventNode;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.inventory.InventoryPreClickEvent;
+import net.minestom.server.event.player.PlayerEntityInteractEvent;
 import net.minestom.server.event.player.PlayerLoginEvent;
-import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.event.server.ServerListPingEvent;
 import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.velocity.VelocityProxy;
-import net.minestom.server.network.packet.server.play.TeamsPacket;
 import net.minestom.server.ping.ResponseData;
 import net.minestom.server.timer.Task;
 import net.minestom.server.utils.validate.Check;
 import net.polar.database.PolaroidDatabase;
+import net.polar.entity.NPC;
 import net.polar.gui.Gui;
 import net.polar.gui.GuiClickable;
 import net.polar.launch.LaunchArguments;
@@ -30,10 +30,10 @@ import net.polar.utils.chat.ChatColor;
 import net.polar.world.TickTrackingInstanceContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 /**
  * This is a wrapper for the {@link MinecraftServer} server.
@@ -98,6 +98,11 @@ public final class Polaroid {
 
             GuiClickable clickable = gui.getClickableAt(event.getSlot());
             if (clickable != null) clickable.onClick(event.getClickType(), event.getPlayer());
+        });
+        eh.addListener(PlayerEntityInteractEvent.class, event -> {
+            if (event.getTarget() instanceof NPC npc) {
+                npc.onInteract(event.getPlayer());
+            }
         });
     }
 

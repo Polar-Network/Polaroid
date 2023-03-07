@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/entity/NPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/NPC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/main/java/net/polar/test/TestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/net/polar/test/TestServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,6 +275,8 @@
       <workItem from="1678191047608" duration="722000" />
       <workItem from="1678191921394" duration="59000" />
       <workItem from="1678192753317" duration="272000" />
+      <workItem from="1678195711794" duration="2575000" />
+      <workItem from="1678199074479" duration="403000" />
     </task>
     <servers />
   </component>
@@ -303,5 +306,16 @@
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/polar/entity/NPC.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
