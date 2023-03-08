@@ -99,11 +99,6 @@ public final class Polaroid {
             GuiClickable clickable = gui.getClickableAt(event.getSlot());
             if (clickable != null) clickable.onClick(event.getClickType(), event.getPlayer());
         });
-        eh.addListener(PlayerEntityInteractEvent.class, event -> {
-            if (event.getTarget() instanceof NPC npc) {
-                npc.onInteract(event.getPlayer());
-            }
-        });
     }
 
     /**

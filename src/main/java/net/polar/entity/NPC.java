@@ -1,91 +1,60 @@
 package net.polar.entity;
 
-import net.kyori.adventure.text.Component;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Pos;
-import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.Player;
 import net.minestom.server.entity.PlayerSkin;
 import net.minestom.server.entity.fakeplayer.FakePlayer;
 import net.minestom.server.entity.fakeplayer.FakePlayerOption;
 import net.minestom.server.entity.metadata.PlayerMeta;
+import net.minestom.server.event.Event;
+import net.minestom.server.event.EventNode;
+import net.minestom.server.event.player.PlayerPacketEvent;
 import net.minestom.server.instance.Instance;
-import net.minestom.server.network.packet.server.play.PlayerInfoPacket;
+import net.minestom.server.network.packet.client.play.ClientInteractEntityPacket;
 import net.minestom.server.network.packet.server.play.TeamsPacket;
+import net.minestom.server.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.function.Consumer;
 
 public class NPC extends FakePlayer {
 
-    private static final TeamsPacket createTeamPacket = MinecraftServer.getTeamManager().createBuilder("npcTeam")
+    private static final EventNode<Event> EVENT_NODE = EventNode.all("npcs");
+    private static final Team NPC_TEAM = MinecraftServer.getTeamManager().createBuilder("npcTeam")
             .nameTagVisibility(TeamsPacket.NameTagVisibility.NEVER)
-            .build().createTeamsCreationPacket();
-
-    private final MultiLineHologram hologram;
-
-    private final PlayerInfoPacket addPlayerPacket;
-    private final PlayerInfoPacket removePlayerPacket;
-    private final TeamsPacket teamPacket;
-    private Consumer<Player> interactConsumer;
-    private boolean hasCooldown = true;
-    private final Set<Player> cooldownPlayers = ConcurrentHashMap.newKeySet();
-
-    public NPC(@NotNull String id, @NotNull PlayerSkin skin, @NotNull List<String> hologram, @Nullable Consumer<Player> interactConsumer) {
-        super(UUID.randomUUID(), id, new FakePlayerOption(), null);
-        this.hologram = new MultiLineHologram(hologram);
-        this.addPlayerPacket = new PlayerInfoPacket(
-                PlayerInfoPacket.Action.ADD_PLAYER,
-                new PlayerInfoPacket.AddPlayer(getUuid(), id, List.of(
-                        new PlayerInfoPacket.AddPlayer.Property("textures",skin.textures(),skin.signature())),
-                        GameMode.CREATIVE,
-                        0,
-                        Component.empty(),
-                        null)
-        );
-        this.interactConsumer = interactConsumer;
-        this.removePlayerPacket = new PlayerInfoPacket(PlayerInfoPacket.Action.REMOVE_PLAYER, new PlayerInfoPacket.RemovePlayer(getUuid()));
-        this.teamPacket = new TeamsPacket("npcTeam", new TeamsPacket.AddEntitiesToTeamAction(List.of(getUuid().toString())));
-        initFullSkin();
-        setTeam(MinecraftServer.getTeamManager().getTeam("npcTeam"));
+            .build();
+    static {
+        MinecraftServer.getGlobalEventHandler().addChild(EVENT_NODE);
     }
 
-    public NPC(@NotNull String id, @NotNull PlayerSkin skin, @NotNull List<String> hologram) {
-        this(id, skin, hologram, null);
+    private final MultiLineHologram display;
+    private final Consumer<Player> onInteraction;
+
+    public NPC(
+        @NotNull String username,
+        @NotNull PlayerSkin skin,
+        @NotNull MultiLineHologram display,
+        @NotNull Consumer<Player> onInteraction
+    ) {
+        super(UUID.randomUUID(), username, new FakePlayerOption().setRegistered(true).setInTabList(false), null);
+        this.display = display;
+        this.onInteraction = onInteraction;
+        setupInteraction();
+        setTeam(NPC_TEAM);
+        scheduleNextTick((ignored) -> {
+            initFullSkin();
+            setSkin(skin);
+        });
     }
 
     @Override
     public CompletableFuture<Void> setInstance(@NotNull Instance instance, @NotNull Pos spawnPosition) {
         return super.setInstance(instance, spawnPosition).thenRun(() -> {
-            hologram.ride(instance, this);
+            display.ride(instance, this);
         });
-    }
-
-    public void onInteract(Player player) {
-        if (hasCooldown && cooldownPlayers.contains(player)) {
-            cooldownPlayers.remove(player);
-            return;
-        }
-        if (interactConsumer != null) {
-            interactConsumer.accept(player);
-            cooldownPlayers.add(player);
-        }
-    }
-
-    @Override @SuppressWarnings("UnstableApiUsage")
-    public void updateNewViewer(@NotNull Player player) {
-        player.sendPacket(addPlayerPacket);
-        player.sendPacket(teamPacket);
-        MinecraftServer.getSchedulerManager().scheduleNextTick(() -> player.sendPacket(removePlayerPacket));
-        super.updateNewViewer(player);
     }
 
     private void initFullSkin() {
@@ -101,19 +70,21 @@ public class NPC extends FakePlayer {
         meta.setNotifyAboutChanges(true);
     }
 
-    public void setInteractConsumer(Consumer<Player> interactConsumer) {
-        this.interactConsumer = interactConsumer;
+    private void setupInteraction() {
+        EventNode<Event> eventNode = EventNode.all(String.valueOf(getEntityId()));
+        EVENT_NODE.addChild(eventNode);
+        eventNode.addListener(PlayerPacketEvent.class, event -> {
+            if (!(event.getPacket() instanceof ClientInteractEntityPacket packet)) return;
+            if (packet.targetId() != getEntityId()) return;
+
+            ClientInteractEntityPacket.Type type = packet.type();
+            if (type.id() == 0) return; // Type is either Attack or InteractAt now
+            if (type instanceof ClientInteractEntityPacket.InteractAt interactAt) {
+                if (interactAt.hand() == Player.Hand.OFF) return;
+            }
+
+            onInteraction.accept(event.getPlayer());
+        });
     }
 
-    public void setHasCooldown(boolean hasCooldown) {
-        this.hasCooldown = hasCooldown;
-    }
-
-    public @Nullable Consumer<Player> getInteractConsumer() {
-        return interactConsumer;
-    }
-
-    public boolean isHasCooldown() {
-        return hasCooldown;
-    }
 }
