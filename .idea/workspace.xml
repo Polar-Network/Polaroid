@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/entity/MultiLineHologram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/MultiLineHologram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/entity/NPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/NPC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/src/main/java/net/polar/test/TestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/net/polar/test/TestServer.java" afterDir="false" />
-    </list>
+    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -278,7 +273,7 @@
       <workItem from="1678195711794" duration="2575000" />
       <workItem from="1678199074479" duration="430000" />
       <workItem from="1678270002186" duration="42000" />
-      <workItem from="1678271155310" duration="3852000" />
+      <workItem from="1678271155310" duration="3913000" />
     </task>
     <servers />
   </component>
