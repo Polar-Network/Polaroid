@@ -5,10 +5,12 @@ import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.PlayerSkin;
 import net.minestom.server.event.GlobalEventHandler;
+import net.minestom.server.event.entity.EntityAttackEvent;
 import net.minestom.server.event.entity.EntityDamageEvent;
 import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.polar.Polaroid;
 import net.polar.entity.NPC;
+import net.polar.utils.chat.ChatColor;
 import net.polar.world.TickTrackingInstanceContainer;
 
 import java.util.List;
@@ -27,7 +29,14 @@ public final class TestServer {
            event.getPlayer().setFlying(true);
         });
         eh.addListener(EntityDamageEvent.class, event -> event.setCancelled(true));
-        new NPC("amoguys", PlayerSkin.fromUsername("Tofaa"), List.of("<red>Woah", "<green>It's", "<blue>an", "<yellow>npc")).properlySpawn(Pos.ZERO, Polaroid.getDefaultInstance());
+        eh.addListener(EntityAttackEvent.class, event -> {
+        });
+
+        NPC npc = new NPC("random0", PlayerSkin.fromUsername("Tofaa"), List.of("<gold>CLICK ME", "<blue>Steven"));
+        npc.setInstance(Polaroid.getDefaultInstance(), new Pos(0, 1, 0));
+        npc.setInteractConsumer(player -> {
+            player.sendMessage(ChatColor.color("<red>CLICKED"));
+        });
     }
 
 }

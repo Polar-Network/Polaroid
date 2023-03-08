@@ -4,7 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.Entity;
 import net.minestom.server.entity.EntityType;
-import net.minestom.server.entity.metadata.other.ArmorStandMeta;
+import net.minestom.server.entity.metadata.other.AreaEffectCloudMeta;
 import net.minestom.server.instance.Instance;
 import net.polar.utils.chat.ChatColor;
 import org.jetbrains.annotations.NotNull;
@@ -52,28 +52,26 @@ public class MultiLineHologram {
 
     public void create(@NotNull Instance instance, @NotNull Pos position) {
         for (int i = 0; i < lines.size(); i++) {
-            Entity entity = new Entity(EntityType.ARMOR_STAND);
-            ArmorStandMeta meta = (ArmorStandMeta) entity.getEntityMeta();
+            Entity entity = new Entity(EntityType.AREA_EFFECT_CLOUD);
+            AreaEffectCloudMeta meta = (AreaEffectCloudMeta) entity.getEntityMeta();
 
             meta.setNotifyAboutChanges(false);
 
-            meta.setSmall(true);
             meta.setHasNoGravity(true);
-            meta.setHasNoBasePlate(true);
-            meta.setMarker(true);
             meta.setInvisible(true);
             meta.setCustomName(lines.get(i));
             meta.setCustomNameVisible(true);
+            meta.setRadius(0);
 
             meta.setNotifyAboutChanges(true);
-
             double yLevel = 0.5 + (0.3 * (lines.size() - i));
             entity.setInstance(instance, position.add(0, yLevel, 0)).thenRun(() -> entities.add(entity));
         }
     }
 
     public void ride(@NotNull Instance instance, @NotNull Entity toRide) {
-        create(instance, toRide.getPosition());
+        remove();
+        create(instance, toRide.getPosition().add(0, 1, 0));
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
             if (i == 0) {
@@ -82,14 +80,6 @@ public class MultiLineHologram {
             else {
                 entities.get(i - 1).addPassenger(entity);
             }
-        }
-    }
-
-    public void teleportSmoothly(Pos position) {
-        for (int i = 0; i < entities.size(); i++) {
-            Entity entity = entities.get(i);
-            double yLevel = 0.5 + (0.3 * (lines.size() - i));
-            entity.teleport(position.add(0, yLevel, 0));
         }
     }
 }
