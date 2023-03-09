@@ -112,4 +112,11 @@ public class NPC extends LivingEntity {
         });
     }
 
+    @Override
+    public void remove() {
+        super.remove();
+        var node = EVENT_NODE.getChildren().stream().filter(n -> n.getName().equals(String.valueOf(getEntityId()))).findFirst().orElse(null);
+        if (node == null) return;
+        EVENT_NODE.removeChild(node);
+    }
 }
