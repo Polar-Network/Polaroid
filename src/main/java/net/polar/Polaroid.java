@@ -6,12 +6,14 @@ import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.builder.Command;
 import net.minestom.server.entity.Player;
+import net.minestom.server.entity.PlayerSkin;
 import net.minestom.server.event.Event;
 import net.minestom.server.event.EventListener;
 import net.minestom.server.event.EventNode;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.inventory.InventoryPreClickEvent;
 import net.minestom.server.event.player.PlayerLoginEvent;
+import net.minestom.server.event.player.PlayerSkinInitEvent;
 import net.minestom.server.event.server.ServerListPingEvent;
 import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.velocity.VelocityProxy;
@@ -53,6 +55,8 @@ public final class Polaroid {
     private static ProxySettings proxySettings;
     private static TickTrackingInstanceContainer defaultInstance;
     private static MotdProvider motdProvider;
+    private static boolean enableDefaultSkinOverwrite = false;
+    private static PlayerSkin defaultSkin;
 
     private Polaroid(@NotNull LaunchArguments launchArguments) {
         onlineMode = launchArguments.onlineMode();
@@ -96,6 +100,11 @@ public final class Polaroid {
 
             GuiClickable clickable = gui.getClickableAt(event.getSlot());
             if (clickable != null) clickable.onClick(event.getClickType(), event.getPlayer());
+        });
+        eh.addListener(PlayerSkinInitEvent.class, event -> {
+            if (enableDefaultSkinOverwrite && event.getSkin() == null) {
+                event.setSkin(defaultSkin);
+            }
         });
     }
 
@@ -205,6 +214,20 @@ public final class Polaroid {
         return LOGGER;
     }
 
+    /**
+     * Should Polaroid automatically overwrite the default skin for players?
+     * @param enabled - true if Polaroid should overwrite the default skin, false otherwise
+     */
+    public static void toggleDefaultSkinOverwrite(boolean enabled) {
+        enableDefaultSkinOverwrite = enabled;
+    }
+
+    /**
+     * @return true if Polaroid is set to overwrite the default skin, false otherwise
+     */
+    public static boolean isDefaultSkinOverwriteEnabled() {
+        return enableDefaultSkinOverwrite;
+    }
 
     /**
      * @return the {@link PolaroidDatabase} instance for the server
@@ -257,5 +280,20 @@ public final class Polaroid {
      */
     public static int getMaxPlayers() {
         return maxPlayers;
+    }
+
+    /**
+     * Set the default skin to overwrite to
+     * @param skin - the new default skin
+     */
+    public static void setDefaultSkin(@NotNull PlayerSkin skin) {
+        defaultSkin = skin;
+    }
+
+    /**
+     * @return the default skin to overwrite to
+     */
+    public static @Nullable PlayerSkin getDefaultSkin() {
+        return defaultSkin;
     }
 }

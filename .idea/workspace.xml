@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/entity/MultiLineHologram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/MultiLineHologram.java" afterDir="false" />
-    </list>
+    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="update MultiLineHologram.java" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -283,8 +280,16 @@
       <workItem from="1678350649265" duration="889000" />
       <workItem from="1678352860839" duration="221000" />
       <workItem from="1678353693605" duration="21000" />
-      <workItem from="1678354276417" duration="594000" />
+      <workItem from="1678354276417" duration="715000" />
     </task>
+    <task id="LOCAL-00001" summary="update MultiLineHologram.java">
+      <created>1678354908341</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678354908341</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,6 +314,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update MultiLineHologram.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="update MultiLineHologram.java" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
