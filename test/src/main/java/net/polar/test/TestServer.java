@@ -20,7 +20,6 @@ public final class TestServer {
         Polaroid.setDefaultInstance(new TickTrackingInstanceContainer(UUID.randomUUID(), TickTrackingInstanceContainer.FULLBRIGHT_DIMENSION));
         GlobalEventHandler eh = MinecraftServer.getGlobalEventHandler();
         NPC npc = new NPC(
-                "npc",
                 PlayerSkin.fromUsername("Tofaa"),
                 new MultiLineHologram("<red>CLICK ME!", "<green>CLICK ME!"),
                 player -> player.sendMessage("You clicked me!")
