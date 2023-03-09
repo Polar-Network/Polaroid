@@ -78,6 +78,7 @@ public final class Polaroid {
         if (proxySettings.enabled()) {VelocityProxy.enable(proxySettings.secret());}
         registerInternalListeners();
         MinecraftServer.getGlobalEventHandler().addChild(EVENT_NODE);
+        defaultSkin = PlayerSkin.fromUuid("fdc0fc16-45c1-4432-ae1a-f9e201dd7aeb");
 
         server.start(address, port);
         getLogger().info(ChatColor.color("<green>Polaroid initialized on address " + address + ":" + port));
@@ -293,7 +294,7 @@ public final class Polaroid {
     /**
      * @return the default skin to overwrite to
      */
-    public static @Nullable PlayerSkin getDefaultSkin() {
+    public static @NotNull PlayerSkin getDefaultSkin() {
         return defaultSkin;
     }
 }
