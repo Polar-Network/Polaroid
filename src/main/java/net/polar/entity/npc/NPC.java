@@ -25,6 +25,7 @@ public class NPC extends FakePlayer {
     private static final EventNode<Event> EVENT_NODE = EventNode.all("npcs");
     private static final Team NPC_TEAM = MinecraftServer.getTeamManager().createBuilder("npcTeam")
             .nameTagVisibility(TeamsPacket.NameTagVisibility.NEVER)
+            .collisionRule(TeamsPacket.CollisionRule.NEVER)
             .build();
     static {
         MinecraftServer.getGlobalEventHandler().addChild(EVENT_NODE);
