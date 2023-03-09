@@ -8,7 +8,7 @@ import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.polar.Polaroid;
 import net.polar.entity.MultiLineHologram;
-import net.polar.entity.NPC;
+import net.polar.entity.npc.NPC;
 import net.polar.world.TickTrackingInstanceContainer;
 
 import java.util.UUID;

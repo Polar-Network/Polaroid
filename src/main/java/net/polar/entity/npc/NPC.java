@@ -1,4 +1,4 @@
-package net.polar.entity;
+package net.polar.entity.npc;
 
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Pos;
@@ -14,12 +14,12 @@ import net.minestom.server.instance.Instance;
 import net.minestom.server.network.packet.client.play.ClientInteractEntityPacket;
 import net.minestom.server.network.packet.server.play.TeamsPacket;
 import net.minestom.server.scoreboard.Team;
+import net.polar.entity.MultiLineHologram;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
-
 public class NPC extends FakePlayer {
 
     private static final EventNode<Event> EVENT_NODE = EventNode.all("npcs");
