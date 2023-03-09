@@ -19,6 +19,7 @@ import net.minestom.server.ping.ResponseData;
 import net.minestom.server.timer.Task;
 import net.minestom.server.utils.validate.Check;
 import net.polar.database.PolaroidDatabase;
+import net.polar.entity.npc.NPC;
 import net.polar.gui.Gui;
 import net.polar.gui.GuiClickable;
 import net.polar.launch.LaunchArguments;
