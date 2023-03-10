@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="add a default skin feature">
+    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="add a default polarbear skin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/ChatColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/ChatColor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/MiniMessageAdditionsParser.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,6 +288,12 @@
       <workItem from="1678353693605" duration="21000" />
       <workItem from="1678354276417" duration="715000" />
       <workItem from="1678356177521" duration="846000" />
+      <workItem from="1678357213849" duration="104000" />
+      <workItem from="1678357916340" duration="54000" />
+      <workItem from="1678359464874" duration="1814000" />
+      <workItem from="1678391664209" duration="256000" />
+      <workItem from="1678391965882" duration="1046000" />
+      <workItem from="1678441055557" duration="685000" />
     </task>
     <task id="LOCAL-00001" summary="update MultiLineHologram.java">
       <created>1678354908341</created>
@@ -299,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678356411749</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add a default polarbear skin">
+      <created>1678357295402</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678357295402</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,7 +345,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update MultiLineHologram.java" />
     <MESSAGE value="add a default skin feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="add a default skin feature" />
+    <MESSAGE value="add a default polarbear skin" />
+    <option name="LAST_COMMIT_MESSAGE" value="add a default polarbear skin" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>

@@ -79,7 +79,7 @@ public final class Polaroid {
         registerInternalListeners();
         MinecraftServer.getGlobalEventHandler().addChild(EVENT_NODE);
         defaultSkin = PlayerSkin.fromUuid("fdc0fc16-45c1-4432-ae1a-f9e201dd7aeb");
-
+        ChatColor.replaceHandler(MiniMessenger.create(database.getClient().getDatabase("minimessage"), "tags").join());
         server.start(address, port);
         getLogger().info(ChatColor.color("<green>Polaroid initialized on address " + address + ":" + port));
     }

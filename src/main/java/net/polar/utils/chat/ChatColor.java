@@ -15,9 +15,7 @@ import java.util.stream.Collectors;
 public final class ChatColor {
 
     private ChatColor() {}
-    private static final MiniMessage miniMessage = MiniMessage.builder()
-            .tags(MiniMessageAdditionsParser.getAdditionsFromFile())
-            .build();
+    private static MiniMessage miniMessage = MiniMessage.miniMessage();
 
     /**
      * Translates a string into a {@link Component}.
@@ -73,6 +71,14 @@ public final class ChatColor {
      */
     public static @NotNull List<String> reverse(@NotNull Component... components) {
         return reverse(List.of(components));
+    }
+
+    /**
+     * Replaces the default MiniMessage object
+     * @param replacement the object to replace to
+     */
+    public static void replaceHandler(@NotNull MiniMessage replacement) {
+        miniMessage = replacement;
     }
 
 }
