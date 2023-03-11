@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
 
 public final class JsonUtils {
 
-    private static final Gson GSON = new GsonBuilder()
+    public static final Gson GSON = new GsonBuilder()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES)
             .setPrettyPrinting()
             .setLenient()
@@ -37,7 +37,7 @@ public final class JsonUtils {
         }
     }
 
-    public static void prettyWrite(@NotNull Object src, @NotNull Type typeOfSrc, @NotNull File file) {
+    public static void write(@NotNull Object src, @NotNull Type typeOfSrc, @NotNull File file) {
         try {
             JsonWriter writer = newJsonWriter(file);
             GSON.toJson(src, typeOfSrc, writer);

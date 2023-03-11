@@ -66,7 +66,7 @@ public class LaunchArguments {
             return JsonUtils.read(file, LaunchArguments.class);
         }
         LaunchArguments args = new LaunchArguments(); // Default arguments
-        JsonUtils.prettyWrite(args, LaunchArguments.class, file);
+        JsonUtils.write(args, LaunchArguments.class, file);
         return args;
     }
 

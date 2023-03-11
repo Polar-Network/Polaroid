@@ -21,6 +21,7 @@ import net.minestom.server.ping.ResponseData;
 import net.minestom.server.timer.Task;
 import net.minestom.server.utils.validate.Check;
 import net.polar.database.PolaroidDatabase;
+import net.polar.database.rank.RankProvider;
 import net.polar.gui.Gui;
 import net.polar.gui.GuiClickable;
 import net.polar.launch.LaunchArguments;
@@ -57,6 +58,8 @@ public final class Polaroid {
     private static MotdProvider motdProvider;
     private static boolean enableDefaultSkinOverwrite = false;
     private static PlayerSkin defaultSkin;
+    private static boolean enableOnlineUUID = false;
+    private static RankProvider rankProvider = RankProvider.defaultProvider();
 
     private Polaroid(@NotNull LaunchArguments launchArguments) {
         onlineMode = launchArguments.onlineMode();
@@ -296,5 +299,21 @@ public final class Polaroid {
      */
     public static @NotNull PlayerSkin getDefaultSkin() {
         return defaultSkin;
+    }
+
+
+    /**
+     * @return the {@link RankProvider} for the servers players
+     */
+    public static @NotNull RankProvider getRankProvider() {
+        return rankProvider;
+    }
+
+    /**
+     * Sets the {@link RankProvider} for the servers players
+     * @param rankProvider - the new RankProvider
+     */
+    public static void setRankProvider(@NotNull RankProvider rankProvider) {
+        Polaroid.rankProvider = rankProvider;
     }
 }
