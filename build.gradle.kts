@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    api("com.github.Minestom:Minestom:-SNAPSHOT")
+    api("com.github.hollow-cube:Minestom:e6d4a2cc91")
     api("net.kyori:adventure-text-minimessage:4.12.0")
     api("com.github.Polar-Network:MiniMessenger:0265bf9331")
     api("com.google.guava:guava:30.1.1-jre")
