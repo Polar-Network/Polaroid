@@ -2,6 +2,8 @@ package net.polar;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.builder.Command;
@@ -22,6 +24,8 @@ import net.minestom.server.timer.Task;
 import net.minestom.server.utils.validate.Check;
 import net.polar.database.PolaroidDatabase;
 import net.polar.database.rank.RankProvider;
+import net.polar.database.suffix.SuffixProvider;
+import net.polar.entity.player.PolaroidPlayer;
 import net.polar.gui.Gui;
 import net.polar.gui.GuiClickable;
 import net.polar.launch.LaunchArguments;
@@ -60,6 +64,7 @@ public final class Polaroid {
     private static PlayerSkin defaultSkin;
     private static boolean enableOnlineUUID = false;
     private static RankProvider rankProvider = RankProvider.defaultProvider();
+    private static SuffixProvider suffixProvider = SuffixProvider.defaultProvider();
 
     private Polaroid(@NotNull LaunchArguments launchArguments) {
         onlineMode = launchArguments.onlineMode();
@@ -89,7 +94,13 @@ public final class Polaroid {
 
     private void registerInternalListeners() {
         GlobalEventHandler eh = MinecraftServer.getGlobalEventHandler();
-        eh.addListener(PlayerLoginEvent.class, event -> event.setSpawningInstance(defaultInstance));
+        eh.addListener(PlayerLoginEvent.class, event -> {
+            if (!(event.getPlayer() instanceof PolaroidPlayer)) {
+                event.getPlayer().kick(Component.text("Invalid player type! If you're an admin please check your code for your PlayerProvider to use PolaroidPlayer", NamedTextColor.RED));
+                return;
+            }
+            event.setSpawningInstance(defaultInstance);
+        });
         eh.addListener(ServerListPingEvent.class, event -> {
 
             ResponseData data;
@@ -311,9 +322,24 @@ public final class Polaroid {
 
     /**
      * Sets the {@link RankProvider} for the servers players
-     * @param rankProvider - the new RankProvider
+     * @param rankProvider - the new {@link RankProvider}
      */
     public static void setRankProvider(@NotNull RankProvider rankProvider) {
         Polaroid.rankProvider = rankProvider;
+    }
+
+    /**
+     * @return the {@link SuffixProvider} for the servers players
+     */
+    public static @NotNull SuffixProvider getSuffixProvider() {
+        return suffixProvider;
+    }
+
+    /**
+     * Sets the {@link SuffixProvider} for the servers players
+     * @param suffixProvider - the new {@link SuffixProvider}
+     */
+    public static void setSuffixProvider(@NotNull SuffixProvider suffixProvider) {
+        Polaroid.suffixProvider = suffixProvider;
     }
 }

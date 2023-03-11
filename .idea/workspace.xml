@@ -4,20 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="add a default polarbear skin">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/Rank.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/RankProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/RankProviderImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/suffix/Suffix.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/suffix/SuffixProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/suffix/SuffixProviderImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/player/PolaroidPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/StringReplacer.java" afterDir="false" />
+    <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="add suffix and prefix providers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/launch/LaunchArguments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/launch/LaunchArguments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/JsonUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/database/suffix/SuffixProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/suffix/SuffixProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/entity/player/PolaroidPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/player/PolaroidPlayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -305,7 +296,7 @@
       <workItem from="1678441055557" duration="685000" />
       <workItem from="1678483925829" duration="962000" />
       <workItem from="1678546059147" duration="5000" />
-      <workItem from="1678547505494" duration="4901000" />
+      <workItem from="1678547505494" duration="5712000" />
     </task>
     <task id="LOCAL-00001" summary="update MultiLineHologram.java">
       <created>1678354908341</created>
@@ -328,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678357295402</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add suffix and prefix providers">
+      <created>1678561905900</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678561905900</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +356,8 @@
     <MESSAGE value="update MultiLineHologram.java" />
     <MESSAGE value="add a default skin feature" />
     <MESSAGE value="add a default polarbear skin" />
-    <option name="LAST_COMMIT_MESSAGE" value="add a default polarbear skin" />
+    <MESSAGE value="add suffix and prefix providers" />
+    <option name="LAST_COMMIT_MESSAGE" value="add suffix and prefix providers" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
