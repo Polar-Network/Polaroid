@@ -19,6 +19,9 @@ import net.minestom.server.event.player.PlayerSkinInitEvent;
 import net.minestom.server.event.server.ServerListPingEvent;
 import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.velocity.VelocityProxy;
+import net.minestom.server.item.Enchantment;
+import net.minestom.server.item.ItemStack;
+import net.minestom.server.item.Material;
 import net.minestom.server.ping.ResponseData;
 import net.minestom.server.timer.Task;
 import net.minestom.server.utils.validate.Check;
@@ -42,8 +45,7 @@ import java.util.UUID;
 
 /**
  * This is a wrapper for the {@link MinecraftServer} server.
- * Internal methods are not documented.
- * {@link Polaroid#initServer()} for the main method
+ * {@link Polaroid#initServer()} should be used in your application to start the Polaroid server.
  */
 @SuppressWarnings("unused")
 public final class Polaroid {

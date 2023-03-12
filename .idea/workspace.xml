@@ -7,6 +7,8 @@
     <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="fix some &quot;quirks&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/entity/npc/NPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/npc/NPC.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,24 +35,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Polaroid" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Polaroid" type="f1a62948:ProjectNode" />
-                <item name="test" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Polaroid" type="f1a62948:ProjectNode" />
-                <item name="test" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Polaroid" type="f1a62948:ProjectNode" />
-                <item name="test" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="shadow" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -108,6 +92,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Github\PolarNetwork\Polaroid\test\src\main\resources" />
+    </key>
+  </component>
   <component name="RunManager" selected="JAR Application.Build &amp; Test">
     <configuration name="Polaroid [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -296,7 +285,8 @@
       <workItem from="1678546059147" duration="5000" />
       <workItem from="1678547505494" duration="6551000" />
       <workItem from="1678563823427" duration="2961000" />
-      <workItem from="1678611880407" duration="873000" />
+      <workItem from="1678611880407" duration="2033000" />
+      <workItem from="1678622682098" duration="2103000" />
     </task>
     <task id="LOCAL-00001" summary="update MultiLineHologram.java">
       <created>1678354908341</created>

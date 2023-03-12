@@ -47,9 +47,8 @@ public class NPC extends LivingEntity {
         this.display = display;
         this.onInteraction = onInteraction;
         setupInteraction();
-        scheduleNextTick((ignored) -> {
-            initFullSkin();
-        });
+        scheduleNextTick((ignored) -> initFullSkin());
+
         List<PlayerInfoPacket.AddPlayer.Property> prop = List.of(new PlayerInfoPacket.AddPlayer.Property("textures", skin.textures(), skin.signature()));
         infoPacket = new PlayerInfoPacket(
                 PlayerInfoPacket.Action.ADD_PLAYER,
