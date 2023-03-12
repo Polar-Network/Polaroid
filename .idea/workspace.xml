@@ -6,16 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="fix some &quot;quirks&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/Polaroid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/RankProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/RankProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/RankProviderImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/RankProviderImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/database/suffix/SuffixProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/suffix/SuffixProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/database/suffix/SuffixProviderImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/suffix/SuffixProviderImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/Rank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/Rank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/entity/player/PolaroidPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/player/PolaroidPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/JsonUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/StringReplacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/StringReplacer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/world/schematic/Schematic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/world/schematic/Schematic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/src/main/java/net/polar/test/TestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/main/java/net/polar/test/TestServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/ChatColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/ChatColor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -294,7 +287,8 @@
       <workItem from="1678563823427" duration="2961000" />
       <workItem from="1678611880407" duration="2033000" />
       <workItem from="1678622682098" duration="2307000" />
-      <workItem from="1678631109570" duration="6880000" />
+      <workItem from="1678631109570" duration="6988000" />
+      <workItem from="1678643513835" duration="684000" />
     </task>
     <task id="LOCAL-00001" summary="update MultiLineHologram.java">
       <created>1678354908341</created>

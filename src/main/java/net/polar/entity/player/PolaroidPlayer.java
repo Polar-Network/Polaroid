@@ -67,18 +67,18 @@ public class PolaroidPlayer extends Player {
     private static @NotNull String CHAT_FORMAT = "%rank% %name% %suffix% <gray>: <white>%message%";
     static {
         REPLACER.addReplacement(
-                "%rank%", (player -> player.rank.getRankPrefix())
+                "%rank%", (player -> player.rank.getRankPrefix() + "<reset>")
         );
         REPLACER.addReplacement(
                 "%suffix%", (player -> {
                     if (player.activeSuffix == null) {
-                        return "";
+                        return "<reset>";
                     }
-                    return player.activeSuffix.getSuffix();
+                    return player.activeSuffix.getSuffix() + "<reset>";
                 })
         );
         REPLACER.addReplacement(
-                "%name%", (PolaroidPlayer::getUsername)
+                "%name%", (player -> player.rank.getNameColor() + player.getUsername() + "<reset>")
         );
     }
 

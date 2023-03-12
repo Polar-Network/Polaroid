@@ -2,7 +2,9 @@ package net.polar.utils.chat;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.minestom.server.item.ItemStack;
 import net.minestom.server.utils.validate.Check;
 import org.jetbrains.annotations.NotNull;
 
@@ -71,6 +73,28 @@ public final class ChatColor {
      */
     public static @NotNull List<String> reverse(@NotNull Component... components) {
         return reverse(List.of(components));
+    }
+
+    /**
+     * Creates a component that represents an {@link ItemStack}, useful for players to show off items in chat.
+     * @param item the item to represent
+     * @return the component
+     */
+    public static @NotNull Component composeItem(@NotNull ItemStack item) {
+        Component component = Component.empty();
+        if (item.getDisplayName() == null) {
+            component = component.append(Component.text(item.material().name().replaceAll("_", " "), NamedTextColor.GRAY));
+        }
+        else {
+            component = component.append(item.getDisplayName());
+        }
+        if (!item.getLore().isEmpty()) {
+            component = component.append(Component.newline());
+            for (Component lore : item.getLore()) {
+                component = component.append(lore);
+            }
+        }
+        return component;
     }
 
     /**

@@ -12,17 +12,25 @@ public final class Rank {
     private final int weight;
     private final @NotNull String rankId;
     private final @NotNull String rankPrefix;
+    private final @NotNull String nameColor;
 
     /**
      * Creates a new rank object
      * @param weight The weight of the rank, the lower the weight the higher the rank (so 0 is the highest)
      * @param rankId The id of the rank ("owner", "admin", "moderator", "default")
      * @param rankPrefix The prefix of the rank ("[Owner]", "[Admin]", "[Mod]", "")
+     * @param nameColor The color of the player name ("<red>")
      */
-    public Rank(int weight, @NotNull String rankId, @NotNull String rankPrefix) {
+    public Rank(
+            int weight,
+            @NotNull String rankId,
+            @NotNull String rankPrefix,
+            @NotNull String nameColor
+    ) {
         this.weight = weight;
         this.rankId = rankId;
         this.rankPrefix = rankPrefix;
+        this.nameColor = nameColor;
     }
 
     /**
@@ -53,6 +61,13 @@ public final class Rank {
      */
     public @NotNull String getRankPrefix() {
         return rankPrefix;
+    }
+
+    /**
+     * @return The color of the player name
+     */
+    public @NotNull String getNameColor() {
+        return nameColor;
     }
 
 
