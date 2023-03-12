@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5ab8872-80c7-47da-8af8-5fc513fca205" name="Changes" comment="fix some &quot;quirks&quot;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/animation/Animatable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/animation/string/FrameAnimatedString.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/animation/string/FrameAnimatedTextComponent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/Rank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/database/rank/Rank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/entity/player/PolaroidPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/entity/player/PolaroidPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/ChatColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/polar/utils/chat/ChatColor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +289,7 @@
       <workItem from="1678611880407" duration="2033000" />
       <workItem from="1678622682098" duration="2307000" />
       <workItem from="1678631109570" duration="6988000" />
-      <workItem from="1678643513835" duration="684000" />
+      <workItem from="1678643513835" duration="3239000" />
     </task>
     <task id="LOCAL-00001" summary="update MultiLineHologram.java">
       <created>1678354908341</created>
