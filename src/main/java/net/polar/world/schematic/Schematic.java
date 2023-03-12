@@ -133,11 +133,13 @@ public record Schematic(
     }
 
 
+
     /**
      * Fetches the used chunks using reflection. Warning: This is a hacky solution and may break in the future and is very slow
      * @param rotation The rotation to apply to the schematic.
      * @return The used chunks
      */
+    @SuppressWarnings("unchecked")
     public long @NotNull [] getAffectedChunksReflection(@NotNull SchematicRotation rotation, @NotNull Point startPoint) {
         final AbsoluteBlockBatch batch = build(rotation, null).toAbsoluteBatch(startPoint.blockX(), startPoint.blockY(), startPoint.blockZ());
         final Field field;

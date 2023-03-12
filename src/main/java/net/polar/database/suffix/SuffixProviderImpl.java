@@ -12,9 +12,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 class SuffixProviderImpl implements SuffixProvider {
 
+    private final Set<Suffix> availableSuffixes = ConcurrentHashMap.newKeySet();
 
     @Override
     public @Nullable Suffix getActiveSuffix(@NotNull PolaroidPlayer player) {
@@ -60,7 +63,7 @@ class SuffixProviderImpl implements SuffixProvider {
     }
 
     @Override
-    public List<Suffix> getSuffixes(@NotNull PolaroidPlayer player) {
+    public @NotNull List<Suffix> getSuffixes(@NotNull PolaroidPlayer player) {
         String username = Polaroid.isOnlineMode() ? player.getUuid().toString() : player.getUsername();
         PolaroidDatabase db = Polaroid.getDatabase();
         MongoDatabase suffixes = db.getClient().getDatabase("suffix");
@@ -90,4 +93,8 @@ class SuffixProviderImpl implements SuffixProvider {
         return suffixesList;
     }
 
+    @Override
+    public void save(@NotNull PolaroidPlayer player) {
+        //TODO: Save suffixes
+    }
 }

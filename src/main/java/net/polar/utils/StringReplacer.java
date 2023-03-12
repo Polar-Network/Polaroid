@@ -48,7 +48,7 @@ public final class StringReplacer<T> {
      */
     public String replace(@NotNull String input, @NotNull T context) {
         for (var replacement : replacements.entrySet()) {
-            input.replace(replacement.getKey(), replacement.getValue().apply(context));
+            input = input.replace(replacement.getKey(), replacement.getValue().apply(context));
         }
         return input;
     }

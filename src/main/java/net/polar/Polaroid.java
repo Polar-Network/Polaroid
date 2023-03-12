@@ -14,6 +14,7 @@ import net.minestom.server.event.EventListener;
 import net.minestom.server.event.EventNode;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.inventory.InventoryPreClickEvent;
+import net.minestom.server.event.player.PlayerChatEvent;
 import net.minestom.server.event.player.PlayerLoginEvent;
 import net.minestom.server.event.player.PlayerSkinInitEvent;
 import net.minestom.server.event.server.ServerListPingEvent;
@@ -61,11 +62,11 @@ public final class Polaroid {
     private static MotdProvider motdProvider;
     private static boolean enableDefaultSkinOverwrite = false;
     private static PlayerSkin defaultSkin;
-    private static boolean enableOnlineUUID = false;
-    private static RankProvider rankProvider = RankProvider.defaultProvider();
-    private static SuffixProvider suffixProvider = SuffixProvider.defaultProvider();
+    private static RankProvider rankProvider;
+    private static SuffixProvider suffixProvider;
 
     private Polaroid(@NotNull LaunchArguments launchArguments) {
+
         onlineMode = launchArguments.onlineMode();
         debugMode = launchArguments.debug();
         String host = launchArguments.host();
@@ -80,13 +81,19 @@ public final class Polaroid {
         defaultInstance = new TickTrackingInstanceContainer(UUID.randomUUID());
         MinecraftServer.getDimensionTypeManager().addDimension(TickTrackingInstanceContainer.FULLBRIGHT_DIMENSION);
         MinecraftServer.setBrandName("Polaroid");
+        MinecraftServer.getConnectionManager().setPlayerProvider(PolaroidPlayer::new);
 
         if (onlineMode) {MojangAuth.init();}
         if (proxySettings.enabled()) {VelocityProxy.enable(proxySettings.secret());}
+
         registerInternalListeners();
+        rankProvider = RankProvider.defaultProvider();
+        rankProvider.refreshRanks();
+        suffixProvider = SuffixProvider.defaultProvider();
         MinecraftServer.getGlobalEventHandler().addChild(EVENT_NODE);
+
         defaultSkin = PlayerSkin.fromUuid("fdc0fc16-45c1-4432-ae1a-f9e201dd7aeb");
-        ChatColor.replaceHandler(MiniMessenger.create(database.getClient().getDatabase("minimessage"), "tags").join());
+        MiniMessenger.create(database.getClient().getDatabase("minimessage"), "tags").thenAccept(mm -> ChatColor.replaceHandler(mm));
         server.start(address, port);
         getLogger().info(ChatColor.color("<green>Polaroid initialized on address " + address + ":" + port));
     }
@@ -119,6 +126,13 @@ public final class Polaroid {
             if (enableDefaultSkinOverwrite && event.getSkin() == null) {
                 event.setSkin(defaultSkin);
             }
+        });
+        eh.addListener(PlayerChatEvent.class, event -> {
+            PolaroidPlayer player = (PolaroidPlayer) event.getPlayer();
+            event.setChatFormat(chatEvent -> ChatColor.color(
+                    PolaroidPlayer.getReplacer().replace(PolaroidPlayer.getChatFormat(), player)
+                            .replace("%message%", chatEvent.getMessage()
+            )));
         });
     }
 

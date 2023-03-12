@@ -6,6 +6,7 @@ import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.PlayerSkin;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.player.PlayerSpawnEvent;
+import net.minestom.server.instance.InstanceContainer;
 import net.polar.Polaroid;
 import net.polar.entity.MultiLineHologram;
 import net.polar.entity.npc.NPC;
