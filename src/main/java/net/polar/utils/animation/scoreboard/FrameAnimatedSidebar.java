@@ -1,6 +1,7 @@
 package net.polar.utils.animation.scoreboard;
 
 import net.minestom.server.scoreboard.Sidebar;
+import net.polar.entity.player.PolaroidPlayer;
 import net.polar.utils.animation.Animatable;
 import net.polar.utils.animation.component.FrameAnimatedTextComponent;
 import org.jetbrains.annotations.NotNull;
@@ -100,6 +101,14 @@ public class FrameAnimatedSidebar implements Animatable<Sidebar> {
     @Override
     public int getLength() {
         return length;
+    }
+
+    /**
+     * Shows the sidebar to the player.
+     * @param player The player to show the sidebar to.
+     */
+    public void show(@NotNull PolaroidPlayer player) {
+        sidebar.addViewer(player);
     }
 
 }
