@@ -14,6 +14,7 @@ public class LaunchArguments {
 
     private final String host;
     private final String mongoUri;
+    private final String redisUrl;
     private final boolean onlineMode;
     private final int maxPlayers;
     private final boolean debug;
@@ -31,6 +32,7 @@ public class LaunchArguments {
     public LaunchArguments(
             @NotNull String host,
             @NotNull String mongoUri,
+            @NotNull String redisUrl,
             boolean onlineMode,
             int maxPlayers,
             boolean debug,
@@ -38,6 +40,7 @@ public class LaunchArguments {
     ) {
         this.host = host;
         this.mongoUri = mongoUri;
+        this.redisUrl = redisUrl;
         this.onlineMode = onlineMode;
         this.maxPlayers = maxPlayers;
         this.debug = debug;
@@ -51,6 +54,7 @@ public class LaunchArguments {
         this(
             "0.0.0.0:25565",
             "mongodb://localhost:27017",
+            "redis://localhost:6379",
              true, 20, false, new ProxySettings(false, "")
         );
     }
@@ -110,5 +114,12 @@ public class LaunchArguments {
      */
     public ProxySettings proxySettings() {
         return proxySettings;
+    }
+
+    /**
+     * @return the redis connection URL.
+     */
+    public String redisUrl() {
+        return redisUrl;
     }
 }

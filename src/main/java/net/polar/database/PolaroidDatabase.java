@@ -2,20 +2,35 @@ package net.polar.database;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.jetbrains.annotations.NotNull;
 
+/**
+ * PolaroidDatabase, this includes the MongoDb client
+ */
 public class PolaroidDatabase {
 
     private final MongoClient client;
 
-    public PolaroidDatabase(MongoClient client) {
+    /**
+     * Create a new PolaroidDatabase instance.
+     * @param client The MongoDb client.
+     */
+    public PolaroidDatabase(@NotNull MongoClient client) {
         this.client = client;
     }
 
-    public PolaroidDatabase(String mongoUri) {
+    /**
+     * Create a new PolaroidDatabase instance.
+     * @param mongoUri The MongoDb URI.
+     */
+    public PolaroidDatabase(@NotNull String mongoUri) {
         this.client = MongoClients.create(mongoUri);
     }
 
-    public MongoClient getClient() {
+    /**
+     * @return The MongoDb client.
+     */
+    public @NotNull MongoClient getClient() {
         return client;
     }
 
