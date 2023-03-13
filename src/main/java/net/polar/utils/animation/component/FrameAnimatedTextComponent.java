@@ -55,4 +55,9 @@ public class FrameAnimatedTextComponent implements Animatable<Component> {
             if (currentFrame >= frames.length) currentFrame = 0;
         } else currentUpdate++;
     }
+
+    @Override
+    public int getLength() {
+        return frames.length;
+    }
 }

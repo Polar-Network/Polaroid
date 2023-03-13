@@ -32,7 +32,6 @@ public class LaunchArguments {
     public LaunchArguments(
             @NotNull String host,
             @NotNull String mongoUri,
-            @NotNull String redisUrl,
             boolean onlineMode,
             int maxPlayers,
             boolean debug,
@@ -54,7 +53,6 @@ public class LaunchArguments {
         this(
             "0.0.0.0:25565",
             "mongodb://localhost:27017",
-            "redis://localhost:6379",
              true, 20, false, new ProxySettings(false, "")
         );
     }
@@ -116,10 +114,4 @@ public class LaunchArguments {
         return proxySettings;
     }
 
-    /**
-     * @return the redis connection URL.
-     */
-    public String redisUrl() {
-        return redisUrl;
-    }
 }

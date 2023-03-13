@@ -73,7 +73,7 @@ public final class Polaroid {
         String[] split = host.split(":");
         address = split[0];
         port = Integer.parseInt(split[1]);
-        database = new PolaroidDatabase(launchArguments.mongoUri(), launchArguments.redisUrl());
+        database = new PolaroidDatabase(launchArguments.mongoUri());
         proxySettings = launchArguments.proxySettings();
         maxPlayers = launchArguments.maxPlayers();
 

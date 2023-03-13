@@ -47,4 +47,9 @@ public class FrameAnimatedString implements Animatable<String> {
             if (currentFrame >= frames.length) currentFrame = 0;
         } else currentUpdate++;
     }
+
+    @Override
+    public int getLength() {
+        return frames.length;
+    }
 }
