@@ -14,7 +14,6 @@ public class LaunchArguments {
 
     private final String host;
     private final String mongoUri;
-    private final String redisUrl;
     private final boolean onlineMode;
     private final int maxPlayers;
     private final boolean debug;
@@ -39,7 +38,6 @@ public class LaunchArguments {
     ) {
         this.host = host;
         this.mongoUri = mongoUri;
-        this.redisUrl = redisUrl;
         this.onlineMode = onlineMode;
         this.maxPlayers = maxPlayers;
         this.debug = debug;
